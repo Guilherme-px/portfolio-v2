@@ -30,7 +30,12 @@
 
             <div class="actions">
                 <UButton class="btn primary" size="md">MEUS PROJETOS</UButton>
-                <UButton class="btn secondary" size="md">QUEM SOU EU?</UButton>
+                <UButton
+                    class="btn secondary"
+                    size="md"
+                    @click="scrollTo('about')"
+                    >QUEM SOU EU?</UButton
+                >
                 <UButton class="btn tertiary" size="md">MINHAS SKILLS</UButton>
                 <UButton
                     class="btn quaternary"
@@ -41,15 +46,15 @@
             </div>
         </div>
 
-        <div class="scroll" @click="scrollToAbout">
+        <div class="scroll" @click="scrollTo('footer')">
             <Icon name="uil:arrow-down" size="24px" />
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-const scrollToAbout = () => {
-    const el = document.getElementById("footer");
+const scrollTo = (section: string) => {
+    const el = document.getElementById(section);
     el?.scrollIntoView({ behavior: "smooth" });
 };
 </script>
