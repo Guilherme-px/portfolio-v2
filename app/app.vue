@@ -1,5 +1,7 @@
 <template>
-    <NuxtPage />
+    <UApp>
+        <NuxtPage />
+    </UApp>
 </template>
 
 <style>
@@ -7,6 +9,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "JetBrains Mono", monospace;
 }
 
 html,
@@ -24,7 +27,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: #ffd500;
-    border-radius: 6px;
     border: 2px solid #111;
 }
 
