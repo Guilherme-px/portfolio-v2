@@ -1,7 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
-    devtools: { enabled: true },
-    modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
+    devtools: { enabled: false },
+    modules: ["@nuxt/ui", "@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
+    css: ["~/assets/css/main.css"],
     ssr: false,
+    fonts: {
+        families: [
+            {
+                name: "JetBrains Mono",
+                weights: ["400", "700"],
+            },
+        ],
+    },
+    icon: {
+        collections: ["uil", "lucide"],
+    },
 });
