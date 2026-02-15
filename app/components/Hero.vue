@@ -44,10 +44,12 @@
                 >
                 <UButton
                     class="btn quaternary"
-                    trailing-icon="i-lucide:download"
+                    trailing-icon="i-lucide-download"
                     size="md"
-                    >CRRRÍCULO</UButton
+                    @click="downloadCv"
                 >
+                    CURRÍCULO
+                </UButton>
             </div>
         </div>
 
@@ -64,6 +66,18 @@
 import { useScrollTo } from "~/composables/useScrollTo";
 
 const { scrollTo } = useScrollTo();
+
+const downloadCv = () => {
+    const url = "/cv/Guilherme-augusto.pdf";
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Guilherme-augusto.pdf";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+};
 </script>
 
 <style scoped>
