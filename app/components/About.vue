@@ -59,7 +59,10 @@
                     :key="card.title"
                     :class="['card', card.color]"
                 >
-                    <Icon :name="card.icon" size="28px" class="icon" />
+                    <div class="card__icon-box">
+                        <Icon :name="card.icon" size="26px" />
+                    </div>
+
                     <strong>{{ card.title }}</strong>
                 </div>
             </div>
@@ -266,14 +269,13 @@ onMounted(() => {
 
 .about__cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .card {
     border: 3px solid black;
     padding: 2rem;
-    font-weight: 900;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -284,9 +286,33 @@ onMounted(() => {
     min-height: 140px;
 }
 
+.card__icon-box {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0 #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card strong {
+    font-weight: bold;
+    font-size: 1.2em;
+    -webkit-text-stroke: 0.3px black;
+}
+
 .card:hover {
     transform: translate(4px, 4px);
     box-shadow: 4px 4px 0 #000;
+}
+
+.card:hover .card__icon-box {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 #000;
+    transition: 0.15s ease;
 }
 
 .card.yellow {
@@ -313,6 +339,14 @@ onMounted(() => {
 
     .sticker-black {
         font-size: 2rem;
+    }
+
+    .about__content {
+        grid-template-columns: 1fr;
+    }
+
+    .about__cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -366,10 +400,6 @@ onMounted(() => {
 
     .tag {
         font-size: 0.8rem;
-    }
-
-    .about__cards {
-        grid-template-columns: 1fr;
     }
 
     .sticker-yellow {
