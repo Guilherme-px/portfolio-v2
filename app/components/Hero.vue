@@ -51,17 +51,19 @@
             </div>
         </div>
 
-        <div class="scroll" @click="scrollTo('footer')">
-            <Icon name="uil:arrow-down" size="24px" />
+        <div
+            @click="scrollTo('footer')"
+            class="absolute bottom-5 right-5 md:bottom-10 md:right-10 w-10 h-10 rounded-full bg-green-500 text-black flex items-center justify-center cursor-pointer transition-transform duration-200 hover:-translate-y-1 z-20 shadow-lg"
+        >
+            <Icon name="uil:arrow-down" size="22px" />
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-const scrollTo = (section: string) => {
-    const el = document.getElementById(section);
-    el?.scrollIntoView({ behavior: "smooth" });
-};
+import { useScrollTo } from "~/composables/useScrollTo";
+
+const { scrollTo } = useScrollTo();
 </script>
 
 <style scoped>
@@ -183,21 +185,6 @@ const scrollTo = (section: string) => {
 :deep(.quaternary) {
     background: #3b82f6;
     color: #000;
-}
-
-.scroll {
-    justify-self: center;
-    margin-bottom: 1rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #22c55e;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1;
 }
 
 .floating-js,
