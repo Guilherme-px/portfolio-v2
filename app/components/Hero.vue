@@ -36,7 +36,12 @@
                     @click="scrollTo('about')"
                     >QUEM SOU EU?</UButton
                 >
-                <UButton class="btn tertiary" size="md">MINHAS SKILLS</UButton>
+                <UButton
+                    class="btn tertiary"
+                    size="md"
+                    @click="scrollTo('skills')"
+                    >MINHAS SKILLS</UButton
+                >
                 <UButton
                     class="btn quaternary"
                     trailing-icon="i-lucide:download"
