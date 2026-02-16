@@ -1,7 +1,7 @@
 <template>
     <footer
         id="footer"
-        class="relative bg-black text-white overflow-hidden border-t-8 border-[#ff3b3b] min-h-[65vh]"
+        class="relative bg-black text-white overflow-hidden border-t-8 border-[#ff3b3b] min-h-[65vh] !py-16 !md:py-0"
     >
         <div class="absolute inset-0">
             <img
@@ -13,10 +13,10 @@
         </div>
 
         <div
-            class="relative z-10 min-h-[inherit] flex flex-col items-center justify-center gap-16 text-center px-6"
+            class="relative z-10 min-h-[inherit] flex flex-col items-center justify-start md:justify-center gap-12 md:gap-16 text-center !px-6"
         >
             <div
-                class="w-full max-w-6xl px-6 flex flex-col items-center gap-12"
+                class="w-full max-w-6xl !px-6 flex flex-col items-center !gap-12 !pt-6 md:pt-0"
             >
                 <h2
                     class="max-w-3xl text-5xl md:text-6xl font-extrabold leading-tight"
@@ -58,11 +58,11 @@
                 </div>
             </div>
 
-            <div class="my-14 w-[92vw] max-w-none">
+            <div class="w-[92vw] max-w-none">
                 <USeparator class="w-full opacity-60" />
             </div>
 
-            <div class="w-full max-w-6xl px-6 flex flex-col items-center gap-4">
+            <div class="w-full max-w-6xl !px-6 flex flex-col items-center gap-4">
                 <p class="text-sm text-gray-400">
                     © 2026 GUILHERME AUGUSTO PORTFOLIO
                 </p>
