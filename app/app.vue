@@ -12,13 +12,15 @@
     font-family: "JetBrains Mono", monospace;
 }
 
-html,
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
-    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
