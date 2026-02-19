@@ -29,7 +29,12 @@
             </p>
 
             <div class="actions">
-                <UButton class="btn primary" size="md">MEUS PROJETOS</UButton>
+                <UButton
+                    class="btn primary"
+                    size="md"
+                    @click="scrollTo('projects')"
+                    >MEUS PROJETOS</UButton
+                >
                 <UButton
                     class="btn secondary"
                     size="md"
