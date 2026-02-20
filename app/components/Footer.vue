@@ -32,23 +32,25 @@
 
                 <div class="flex items-center justify-center gap-8">
                     <a
-                        href="#"
+                        :href="whatsAppWebUrl"
                         @click.prevent="openWhatsApp"
                         rel="noopener noreferrer"
                         class="w-20 h-20 flex items-center justify-center border-4 border-white transition-all duration-300 hover:-translate-y-2 bg-green-500"
                     >
                         <Icon name="lucide:message-circle-more" size="28" />
                     </a>
+
                     <a
-                        href="https://www.linkedin.com/in/guilherme-augusto-da-silva/"
+                        :href="linkedInWebUrl"
                         @click.prevent="openLinkedIn"
                         rel="noopener noreferrer"
                         class="w-20 h-20 flex items-center justify-center border-4 border-white transition-all duration-300 hover:-translate-y-2 bg-blue-600"
                     >
                         <Icon name="lucide:linkedin" size="28" />
                     </a>
+
                     <a
-                        href="mailto:guilherme.augusto@email.com"
+                        :href="mailtoUrl"
                         @click.prevent="openEmail"
                         rel="noopener noreferrer"
                         class="w-20 h-20 flex items-center justify-center border-4 border-white transition-all duration-300 hover:-translate-y-2 bg-red-500"
@@ -62,7 +64,9 @@
                 <USeparator class="w-full opacity-60" />
             </div>
 
-            <div class="w-full max-w-6xl !px-6 flex flex-col items-center gap-4">
+            <div
+                class="w-full max-w-6xl !px-6 flex flex-col items-center gap-4"
+            >
                 <p class="text-sm text-gray-400">
                     © 2026 GUILHERME AUGUSTO PORTFOLIO
                 </p>
@@ -73,6 +77,7 @@
                     FEITO COM ❤️ & NUXT
                 </div>
             </div>
+
             <div
                 @click="scrollTo('hero')"
                 class="absolute bottom-5 right-5 md:bottom-10 md:right-10 w-10 h-10 rounded-full bg-green-500 text-black flex items-center justify-center cursor-pointer transition-transform duration-200 hover:-translate-y-1 z-20 shadow-lg"
@@ -84,56 +89,63 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { useScrollTo } from "~/composables/useScrollTo";
 
 const { scrollTo } = useScrollTo();
+const config = useRuntimeConfig();
+
+const LINKEDIN_USERNAME = String(config.public.linkedinUsername ?? "");
+const WHATSAPP_PHONE = String(config.public.whatsappPhone ?? "");
+const EMAIL = String(config.public.email ?? "");
+const EMAIL_SUBJECT = String(config.public.emailSubject ?? "");
+const EMAIL_BODY = String(config.public.emailBody ?? "");
+
+const isMobilePointer = () => window.matchMedia("(pointer: coarse)").matches;
+
+const linkedInWebUrl = computed(
+    () => `https://www.linkedin.com/in/${LINKEDIN_USERNAME}/`,
+);
+const linkedInAppUrl = computed(() => `linkedin://in/${LINKEDIN_USERNAME}`);
+
+const whatsAppWebUrl = computed(() => `https://wa.me/${WHATSAPP_PHONE}`);
+const whatsAppAppUrl = computed(
+    () => `whatsapp://send?phone=${WHATSAPP_PHONE}`,
+);
+
+const mailtoUrl = computed(() => {
+    const subject = encodeURIComponent(EMAIL_SUBJECT);
+    const body = encodeURIComponent(EMAIL_BODY);
+    return `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+});
 
 const openLinkedIn = () => {
-    const webUrl = "https://www.linkedin.com/in/guilherme-augusto-da-silva/";
-    const appUrl = "linkedin://in/guilherme-augusto-da-silva";
+    const webUrl = linkedInWebUrl.value;
+    const appUrl = linkedInAppUrl.value;
 
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobile) {
+    if (isMobilePointer()) {
         window.location.href = appUrl;
-
-        setTimeout(() => {
-            window.location.href = webUrl;
-        }, 600);
+        setTimeout(() => (window.location.href = webUrl), 600);
     } else {
         window.open(webUrl, "_blank", "noopener,noreferrer");
     }
 };
 
 const openWhatsApp = () => {
-    const phone = "5544991774214";
-    const webUrl = `https://wa.me/${phone}`;
-    const appUrl = `whatsapp://send?phone=${phone}`;
+    const webUrl = whatsAppWebUrl.value;
+    const appUrl = whatsAppAppUrl.value;
 
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobile) {
+    if (isMobilePointer()) {
         window.location.href = appUrl;
-        setTimeout(() => {
-            window.location.href = webUrl;
-        }, 600);
+        setTimeout(() => (window.location.href = webUrl), 600);
     } else {
         window.open(webUrl, "_blank", "noopener,noreferrer");
     }
 };
 
 const openEmail = () => {
-    const email = "guilherme.s.goncalves@outlook.com";
-    const subject = encodeURIComponent("Contato pelo portfólio");
-    const body = encodeURIComponent("Olá, Guilherme!");
-
-    const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobile) {
-        window.location.href = mailto;
-    } else {
-        window.open(mailto, "_blank", "noopener,noreferrer");
-    }
+    const url = mailtoUrl.value;
+    if (isMobilePointer()) window.location.href = url;
+    else window.open(url, "_blank", "noopener,noreferrer");
 };
 </script>
