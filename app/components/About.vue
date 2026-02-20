@@ -1,69 +1,120 @@
 <template>
-    <section class="about" id="about">
-        <div class="about__title-wrapper">
-            <div class="sticker">
-                <div class="sticker-yellow"></div>
-                <div class="sticker-black">
+    <section
+        id="about"
+        class="relative !py-24 !px-16 max-lg:!py-16 max-lg:!px-8 max-md:!py-12 max-md:!px-6 !bg-[#f2f2f2] !text-[#111] overflow-hidden"
+    >
+        <div class="flex justify-center !mb-28">
+            <div class="relative">
+                <div
+                    class="absolute !top-[-18px] !left-[-5px] !w-[110px] !h-[30px] !bg-[#ffd500de] !-rotate-12 z-[1] max-md:!w-[100px] max-md:!h-[28px]"
+                />
+                <div
+                    class="absolute !bottom-[-12px] !right-[-8px] !w-[100px] !h-[25px] !bg-[#2978ffe0] !rotate-[15deg] z-[1] max-md:!bottom-[-16px] max-md:!right-[-12px] max-md:!w-[90px] max-md:!h-[25px] max-[480px]:!w-[70px] max-[480px]:!h-[25px]"
+                />
+
+                <div
+                    class="relative inline-flex items-center gap-2 !border-[3px] !border-[rgb(255,77,77)] !bg-[#111] !text-white !px-[1.6rem] !py-[0.7rem] !-rotate-2 !shadow-[6px_6px_0_#000] !text-[2.5rem] !font-black max-lg:!text-[2rem] max-md:!text-[1.6rem] max-md:!px-[1.2rem] max-md:!py-[0.6rem] max-[480px]:!text-[1.3rem] max-[480px]:text-center"
+                >
                     <span>SOBRE</span>
-                    <span class="highlight">MIM</span>
+                    <span class="!text-[#ff3c3c]">MIM</span>
                 </div>
-                <div class="sticker-blue"></div>
             </div>
         </div>
 
-        <div class="about__content">
-            <div class="about__box">
-                <p>
+        <div
+            class="grid [grid-template-columns:1.2fr_1fr] !gap-12 !mt-12 items-start max-lg:grid-cols-1 max-lg:!gap-8"
+        >
+            <div
+                class="relative !border-[3px] !border-black !p-8 !shadow-[8px_7px_0_#000] !bg-white max-md:!p-6"
+            >
+                <span
+                    class="absolute !top-[-10px] !left-[-10px] !w-5 !h-5 !rounded-full !border-2 !border-black !bg-[#00e676]"
+                />
+                <span
+                    class="absolute !top-[-10px] !right-[-12px] !w-5 !h-5 !rounded-full !border-2 !border-black !bg-[#ff5252]"
+                />
+
+                <p class="!text-[1.1rem] !leading-[1.6] max-md:!text-[1rem]">
                     Sou um desenvolvedor
-                    <span class="highlight-text">fullstack</span>
-                    formado em Análise e Desenvolvimento de Sistemas pela
-                    <span class="highlight-text">UNIPAR (2020)</span>. Desde
-                    2021 desenvolvo aplicações modernas com foco na
-                    <span class="highlight-text">stack JavaScript</span>,
+                    <span class="!bg-yellow-300 !px-1">fullstack</span> formado
+                    em Análise e Desenvolvimento de Sistemas pela
+                    <span class="!bg-yellow-300 !px-1">UNIPAR (2020)</span>.
+                    Desde 2021 desenvolvo aplicações modernas com foco na
+                    <span class="!bg-yellow-300 !px-1">stack JavaScript</span>,
                     atuando do frontend ao backend com atenção a arquitetura,
                     segurança e performance.
                 </p>
 
-                <p>
+                <p class="!text-[1.1rem] !leading-[1.6] max-md:!text-[1rem]">
                     Trabalho na construção de interfaces escaláveis e APIs
                     robustas, aplicando boas práticas, testes automatizados e
                     organização de código para garantir qualidade do
                     desenvolvimento até a entrega.
                 </p>
 
-                <p class="comment">
+                <p class="!mt-6 !text-[#444]">
                     // Código limpo, arquitetura bem pensada e soluções prontas
                     para escalar.
                 </p>
 
-                <div class="tags">
+                <div class="flex !gap-2 !mt-6 max-[480px]:flex-wrap">
                     <span
                         v-for="tag in tags"
                         :key="tag.label"
-                        :class="['tag', tag.color]"
+                        class="inline-flex items-center !gap-2 !px-[0.6rem] !py-[0.3rem] !font-bold !border-2 !border-black"
+                        :class="[
+                            tag.color === 'yellow'
+                                ? '!bg-[#ffd600] !text-black'
+                                : '',
+                            tag.color === 'blue'
+                                ? '!bg-[#2979ff] !text-white'
+                                : '',
+                            tag.color === 'red'
+                                ? '!bg-[#ff5252] !text-white'
+                                : '',
+                            tag.color === 'green'
+                                ? '!bg-[#69f0ae] !text-black'
+                                : '',
+                        ]"
                     >
                         <Icon
                             v-if="isMobile && tag.icon"
                             :name="tag.icon"
                             size="20px"
-                            class="icon"
+                            class="inline-block"
                         />
-                        {{ tag.label }}
+                        <span class="max-[480px]:!text-[0.8rem]">{{
+                            tag.label
+                        }}</span>
                     </span>
                 </div>
             </div>
 
-            <div class="about__cards">
+            <div
+                class="grid !gap-6 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))] max-lg:!grid-cols-2 max-md:!grid-cols-2 max-[480px]:!hidden"
+            >
                 <div
                     v-for="card in cards"
                     :key="card.title"
-                    :class="['card', card.color]"
+                    class="group !border-[3px] !border-black !p-8 flex flex-col !gap-4 !min-h-[140px] !shadow-[8px_8px_0_#000] transform-gpu transition-all duration-300 ease-out hover:!translate-x-[4px] hover:!translate-y-[4px] hover:!shadow-[4px_4px_0_#000] max-md:!p-6"
+                    :class="[
+                        card.color === 'yellow' ? '!bg-[#ffd600]' : '',
+                        card.color === 'red' ? '!bg-[#ff8a80]' : '',
+                        card.color === 'blue' ? '!bg-[#82b1ff]' : '',
+                        card.color === 'green' ? '!bg-[#69f0ae]' : '',
+                    ]"
                 >
-                    <div class="card__icon-box">
+                    <div
+                        class="!w-[50px] !h-[50px] !bg-white !border-[3px] !border-black !shadow-[6px_6px_0_#000] flex items-center justify-center transform-gpu transition-all duration-300 ease-out group-hover:!translate-x-[3px] group-hover:!translate-y-[3px] group-hover:!shadow-[3px_3px_0_#000]"
+                    >
                         <Icon :name="card.icon" size="26px" />
                     </div>
 
-                    <strong>{{ card.title }}</strong>
+                    <strong
+                        class="!font-bold !text-[1.2em] [text-shadow:-0.3px_0_0_#000,0.3px_0_0_#000,0_-0.3px_0_#000,0_0.3px_0_#000]"
+                    >
+                        {{ card.title }}
+                    </strong>
                 </div>
             </div>
         </div>
@@ -71,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 
 type Tag = {
     label: string;
@@ -87,16 +138,8 @@ const cards = [
         icon: "i-lucide:layers",
         color: "yellow",
     },
-    {
-        title: "BACKEND & APIs",
-        icon: "i-lucide:server",
-        color: "red",
-    },
-    {
-        title: "CLOUD & DEVOPS",
-        icon: "i-lucide:cloud",
-        color: "blue",
-    },
+    { title: "BACKEND & APIs", icon: "i-lucide:server", color: "red" },
+    { title: "CLOUD & DEVOPS", icon: "i-lucide:cloud", color: "blue" },
     {
         title: "TESTES & QUALIDADE",
         icon: "i-lucide:test-tube-2",
@@ -120,304 +163,16 @@ const tags = computed<Tag[]>(() => {
     ];
 });
 
-onMounted(() => {
-    const checkScreen = () => {
-        isMobile.value = window.innerWidth <= 480;
-    };
+const checkScreen = () => {
+    isMobile.value = window.innerWidth <= 480;
+};
 
+onMounted(() => {
     checkScreen();
     window.addEventListener("resize", checkScreen);
 });
+
+onBeforeUnmount(() => {
+    window.removeEventListener("resize", checkScreen);
+});
 </script>
-
-<style scoped>
-.about {
-    position: relative;
-    padding: 6rem 4rem;
-    background: #f2f2f2;
-    overflow: hidden;
-    color: #111;
-}
-
-.about__title-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 7rem;
-}
-
-.sticker {
-    position: relative;
-}
-
-.sticker-black {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 3px solid rgb(255, 77, 77);
-    font-size: 2.5rem;
-    font-weight: 900;
-    background: #111;
-    color: white;
-    padding: 0.7rem 1.6rem;
-    transform: rotate(-2deg);
-    box-shadow: 6px 6px 0 #000;
-}
-
-.sticker-yellow {
-    position: absolute;
-    top: -18px;
-    left: -5px;
-    width: 110px;
-    height: 30px;
-    background: #ffd500de;
-    transform: rotate(-12deg);
-    z-index: 1;
-}
-
-.sticker-blue {
-    position: absolute;
-    bottom: -12px;
-    right: -8px;
-    width: 100px;
-    height: 25px;
-    transform: rotate(15deg);
-    background: #2978ffe0;
-    z-index: 1;
-}
-
-.sticker-black .highlight {
-    color: #ff3c3c;
-}
-
-.about__content {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
-    align-items: start;
-}
-
-.about__box {
-    border: 3px solid black;
-    padding: 2rem;
-    box-shadow: 8px 7px 0 #000;
-    position: relative;
-    background: white;
-}
-
-.about__box::before,
-.about__box::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid black;
-}
-
-.about__box::before {
-    top: -10px;
-    left: -10px;
-    background: #00e676;
-}
-
-.about__box::after {
-    top: -10px;
-    right: -12px;
-    background: #ff5252;
-}
-
-.about__box p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-.highlight-text {
-    background: yellow;
-    padding: 0 4px;
-}
-
-.comment {
-    margin-top: 1.5rem;
-    color: #444;
-}
-
-.tags {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-}
-
-.tag {
-    padding: 0.3rem 0.6rem;
-    font-weight: bold;
-    border: 2px solid black;
-}
-
-.tag.yellow {
-    background: #ffd600;
-}
-.tag.blue {
-    background: #2979ff;
-    color: white;
-}
-.tag.red {
-    background: #ff5252;
-    color: white;
-}
-
-.about__cards {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.card {
-    border: 3px solid black;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    box-shadow: 8px 8px 0 #000;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-    min-height: 140px;
-}
-
-.card__icon-box {
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    border: 3px solid #000;
-    box-shadow: 6px 6px 0 #000;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card strong {
-    font-weight: bold;
-    font-size: 1.2em;
-    -webkit-text-stroke: 0.3px black;
-}
-
-.card:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 4px 4px 0 #000;
-}
-
-.card:hover .card__icon-box {
-    transform: translate(3px, 3px);
-    box-shadow: 3px 3px 0 #000;
-    transition: 0.15s ease;
-}
-
-.card.yellow {
-    background: #ffd600;
-}
-.card.red {
-    background: #ff8a80;
-}
-.card.blue {
-    background: #82b1ff;
-}
-.card.green {
-    background: #69f0ae;
-}
-
-@media (max-width: 1024px) {
-    .about {
-        padding: 4rem 2rem;
-    }
-
-    .about__content {
-        gap: 2rem;
-    }
-
-    .sticker-black {
-        font-size: 2rem;
-    }
-
-    .about__content {
-        grid-template-columns: 1fr;
-    }
-
-    .about__cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .about {
-        padding: 3rem 1.5rem;
-    }
-
-    .about__content {
-        grid-template-columns: 1fr;
-    }
-
-    .about__cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .sticker-black {
-        font-size: 1.6rem;
-        padding: 0.6rem 1.2rem;
-    }
-
-    .about__box {
-        padding: 1.5rem;
-    }
-
-    .about__box p {
-        font-size: 1rem;
-    }
-
-    .card {
-        padding: 1.5rem;
-    }
-
-    .sticker-blue {
-        bottom: -16px;
-        right: -12px;
-        width: 90px;
-        height: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .sticker-black {
-        font-size: 1.3rem;
-        text-align: center;
-    }
-
-    .tags {
-        flex-wrap: wrap;
-    }
-
-    .tag {
-        font-size: 0.8rem;
-    }
-
-    .sticker-yellow {
-        top: -18px;
-        left: -5px;
-        width: 100px;
-        height: 28px;
-    }
-
-    .sticker-blue {
-        bottom: -16px;
-        right: -12px;
-        width: 70px;
-        height: 25px;
-    }
-
-    .about__cards {
-        display: none;
-    }
-}
-</style>
