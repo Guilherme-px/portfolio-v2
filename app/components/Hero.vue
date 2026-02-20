@@ -1,56 +1,78 @@
 <template>
-    <section class="hero" id="hero">
-        <div class="overlay"></div>
+    <section
+        id="hero"
+        class="relative min-h-screen !px-6 !py-8 overflow-hidden text-white text-center grid [grid-template-rows:1fr_auto] bg-[url('/assets/imgs/hero.jpg')] bg-center bg-cover"
+    >
+        <div class="absolute inset-0 bg-black/65 z-0" />
 
-        <div class="hero-content">
+        <div class="relative z-10 flex flex-col items-center justify-center">
             <img
                 src="/assets/imgs/js.png"
                 alt="JavaScript"
-                class="floating-js floating-top"
+                class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] left-[5%] top-[5%] rotate-[-20deg] [filter:drop-shadow(0_0_10px_rgba(247,223,30,0.5))] animate-[float_3s_ease-in-out_infinite] max-sm:opacity-40"
             />
             <img
                 src="/assets/imgs/code.png"
-                alt="JavaScript"
-                class="floating-code floating-bottom"
+                alt="Code"
+                class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] right-[8%] bottom-[10%] [filter:drop-shadow(0_0_10px_rgba(255,255,255,0.5))] animate-[pulseScale_2.5s_ease-in-out_infinite] max-sm:opacity-40"
             />
 
-            <div class="portfolio-tag">Dev Fullstack</div>
+            <div
+                class="!mb-[clamp(1.5rem,4vw,3rem)] bg-yellow-400 text-black !px-4 !py-[0.4rem] !font-bold rotate-[-5deg]"
+            >
+                Dev Fullstack
+            </div>
 
-            <h1 class="title">
-                <span class="title_highlight">Guilherme</span>
-                <span class="title_accent">Augusto</span>
+            <h1 class="leading-none">
+                <span class="block text-[clamp(2.5rem,8vw,6rem)] font-black"
+                    >Guilherme</span
+                >
+                <span
+                    class="block text-[clamp(2.5rem,8vw,6rem)] font-black text-[#ff3b3b]"
+                    >Augusto</span
+                >
             </h1>
 
-            <p class="subtitle">
+            <p
+                class="!mt-6 !px-4 !py-[0.6rem] !border-2 !border-white bg-black/70 tracking-[2px] max-w-[600px] rotate-[-1deg]"
+            >
                 Criando arte
-                <span class="subtitle_highlight">através</span>
+                <span class="text-green-500 font-bold">através</span>
                 do
-                <span class="subtitle_accent">código</span>
+                <span class="text-blue-500 font-bold">código</span>
             </p>
 
-            <div class="actions">
+            <div
+                class="!mt-[clamp(2rem,5vw,3rem)] !mb-[30px] flex flex-wrap justify-center gap-4 max-w-[900px] max-sm:flex-col max-sm:items-center w-full"
+            >
                 <UButton
-                    class="btn primary"
                     size="md"
+                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-orange-500 !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150"
                     @click="scrollTo('projects')"
-                    >MEUS PROJETOS</UButton
                 >
+                    MEUS PROJETOS
+                </UButton>
+
                 <UButton
-                    class="btn secondary"
                     size="md"
+                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-white !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150"
                     @click="scrollTo('about')"
-                    >QUEM SOU EU?</UButton
                 >
+                    QUEM SOU EU?
+                </UButton>
+
                 <UButton
-                    class="btn tertiary"
                     size="md"
+                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-yellow-400 !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150"
                     @click="scrollTo('skills')"
-                    >MINHAS SKILLS</UButton
                 >
+                    MINHAS SKILLS
+                </UButton>
+
                 <UButton
-                    class="btn quaternary"
-                    trailing-icon="i-lucide-download"
                     size="md"
+                    trailing-icon="i-lucide-download"
+                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-blue-500 !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150"
                     @click="downloadCv"
                 >
                     CURRÍCULO
@@ -74,7 +96,6 @@ const { scrollTo } = useScrollTo();
 
 const downloadCv = () => {
     const url = "/cv/Guilherme-augusto.pdf";
-
     const a = document.createElement("a");
     a.href = url;
     a.download = "Guilherme-augusto.pdf";
@@ -85,158 +106,7 @@ const downloadCv = () => {
 };
 </script>
 
-<style scoped>
-.hero {
-    position: relative;
-    min-height: 100vh;
-    padding: 2rem 1.5rem;
-    background: url("/assets/imgs/hero.jpg") center/cover no-repeat;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    overflow: hidden;
-}
-
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    z-index: 0;
-}
-
-.hero-content {
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.portfolio-tag {
-    margin-bottom: clamp(1.5rem, 4vw, 3rem);
-    background: #facc15;
-    color: #000;
-    padding: 0.4rem 1rem;
-    font-weight: bold;
-    transform: rotate(-5deg);
-    z-index: 1;
-}
-
-.title {
-    z-index: 1;
-    line-height: 1;
-}
-
-.title_highlight,
-.title_accent {
-    display: block;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 900;
-}
-
-.title_accent {
-    color: #ff3b3b;
-}
-
-.subtitle {
-    z-index: 1;
-    margin-top: 1.5rem;
-    padding: 0.6rem 1rem;
-    border: 2px solid #fff;
-    background: rgba(0, 0, 0, 0.7);
-    letter-spacing: 2px;
-    max-width: 600px;
-    transform: rotate(-1deg);
-}
-
-.subtitle_highlight {
-    color: #22c55e;
-    font-weight: bold;
-}
-
-.subtitle_accent {
-    color: #3b82f6;
-    font-weight: bold;
-}
-
-.actions {
-    z-index: 1;
-    margin-top: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 30px;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 900px;
-}
-
-:deep(.btn) {
-    padding: 0.9rem 1.6rem;
-    border-radius: 0;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-    border: 2px solid #000;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-    min-width: 180px;
-}
-
-:deep(.btn:hover) {
-    transform: translate(-3px, -3px);
-    box-shadow: 4px 4px 0 #000;
-}
-
-:deep(.primary) {
-    background: #f97316;
-    color: #000;
-}
-:deep(.secondary) {
-    background: #fff;
-    color: #000;
-}
-:deep(.tertiary) {
-    background: #facc15;
-    color: #000;
-}
-:deep(.quaternary) {
-    background: #3b82f6;
-    color: #000;
-}
-
-.floating-js,
-.floating-code {
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.floating-js {
-    width: clamp(50px, 6vw, 80px);
-    filter: drop-shadow(0 0 10px rgba(247, 223, 30, 0.5));
-}
-
-.floating-code {
-    width: clamp(50px, 6vw, 80px);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-}
-
-.floating-top {
-    top: 5%;
-    left: 5%;
-    transform: rotate(-20deg);
-    animation: float 3s ease-in-out infinite;
-}
-
-.floating-bottom {
-    bottom: 10%;
-    right: 8%;
-    animation: pulseScale 2.5s ease-in-out infinite;
-}
-
+<style>
 @keyframes float {
     0%,
     100% {
@@ -254,23 +124,6 @@ const downloadCv = () => {
     }
     50% {
         transform: scale(1.15);
-    }
-}
-
-@media (max-width: 640px) {
-    .actions {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .floating-js,
-    .floating-code {
-        opacity: 0.4;
     }
 }
 </style>
