@@ -21,18 +21,18 @@ export const projects: Project[] = [
         description:
             "Landing page para apresentar o produto Schedify e permitir a assinatura de um plano.",
         details:
-            "Landing page focada em conversão, com seções de benefícios, planos e CTA. Integração de pagamento e validações de formulário. Layout responsivo e otimizado para performance.",
+            "Landing page focada em conversão, com seções de benefícios, planos e CTA. Integração de pagamento com Stripe e validações de formulário. Layout responsivo, otimizado para performance e SEO para melhor indexação.",
         image: schedifyLandingImg,
         tags: ["NEXT", "STRIPE", "ZUSTAND", "ZOD", "REACT HOOK FORM"],
         color: "yellow",
-        youtubeId: "https://youtu.be/hZUWwN35TLY",
+        // youtubeId: "https://youtu.be/hZUWwN35TLY",
     },
     {
         title: "CONVERSOR DE TEXTO",
         description:
             "Conversor de texto para transformar conteúdos em diferentes formatos e facilitar tarefas do dia a dia.",
         details:
-            "Ferramenta para converter e padronizar textos (cases, slug, limpeza e formatação). UI simples e rápida, com ações de copiar e feedback visual. Cobertura com testes e pipeline de CI/CD.",
+            "Ferramenta para converter e padronizar textos (cases, slug, limpeza e formatação). UI simples e rápida, com ações de copiar e feedback visual. Cobertura com testes unitários, e2e e pipeline de CI/CD.",
         image: textConvertImg,
         tags: ["VUE", "VITEST", "TAILWINDCSS", "CYPRESS", "CI/CD"],
         color: "red",
