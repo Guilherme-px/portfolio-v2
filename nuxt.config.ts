@@ -16,4 +16,13 @@ export default defineNuxtConfig({
     icon: {
         collections: ["uil", "lucide"],
     },
+    runtimeConfig: {
+        public: {
+            linkedinUsername: "",
+            whatsappPhone: "",
+            email: "",
+            emailSubject: "",
+            emailBody: "",
+        },
+    },
 });
