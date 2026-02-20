@@ -1,35 +1,82 @@
 <template>
-    <section id="skills" class="skills" ref="sectionRef">
-        <div class="skills__container">
-            <div class="skills__title">
-                <h2>
-                    <span class="white">MINHAS</span>
-                    <span class="gradient"> SKILLS</span>
+    <section id="skills" class="bg-[#111] text-white !py-24 !px-12">
+        <div class="mx-auto w-full text-center">
+            <div class="inline-block !mb-16 -rotate-1">
+                <h2
+                    class="!text-5xl md:!text-6xl !font-extrabold !leading-tight"
+                >
+                    <span class="text-white">MINHAS</span>
+                    <span
+                        class="bg-gradient-to-r from-[#ffd600] to-[#ff9800] bg-clip-text text-transparent"
+                    >
+                        SKILLS
+                    </span>
                 </h2>
-                <div class="underline"></div>
+                <div class="!h-[6px] !w-full !bg-[#ff3b3b]" />
             </div>
 
-            <div class="skills__grid">
+            <div
+                class="grid !gap-8 [grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]"
+            >
                 <div
-                    v-for="skill in skills"
+                    v-for="(skill, index) in skills"
                     :key="skill.name"
-                    class="card-wrapper"
+                    class="group relative opacity-0 -translate-x-[120px] transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
                 >
-                    <div class="shadow-card"></div>
+                    <div
+                        class="absolute inset-0 bg-black !border-[4px] !border-white translate-x-3 translate-y-3 transition-transform duration-150 group-hover:!translate-x-[6px] group-hover:!translate-y-[6px]"
+                    />
 
                     <UCard
                         :ui="{
-                            root: 'skill-card !rounded-none !shadow-none',
-                            body: 'p-0',
+                            root: '!rounded-none !shadow-none !ring-0 !ring-offset-0 !bg-[color:var(--card-bg)]',
+                            body: '!p-0',
+                            header: '!p-0',
+                            footer: '!p-0',
                         }"
-                        :class="skill.color"
+                        class="relative z-10 !border-[4px] !border-white !rounded-none !shadow-none !ring-0 !ring-offset-0 !overflow-hidden transition-transform duration-150 group-hover:!translate-x-[6px] group-hover:!translate-y-[6px]"
+                        :style="{
+                            '--card-bg': skill.brand,
+                            '--fg': skill.fg,
+                        }"
                     >
-                        <div class="card-content">
-                            <Icon :name="skill.icon" size="40px" />
-                            <strong>{{ skill.name }}</strong>
+                        <div
+                            class="relative !flex !flex-col !items-center !justify-center !gap-4 !p-8 !font-black !text-center !leading-none text-[color:var(--fg)]"
+                        >
+                            <span
+                                class="absolute left-[5px] top-[5px] !w-2 !h-2 !rounded-full !bg-black"
+                            />
+                            <span
+                                class="absolute right-[5px] bottom-[5px] !w-2 !h-2 !rounded-full !bg-black"
+                            />
+
+                            <i
+                                v-if="skill.icon"
+                                :class="skill.icon"
+                                class="!text-[40px] !leading-none !text-[color:var(--fg)]"
+                            />
+
+                            <img
+                                v-else-if="skill.iconImg"
+                                :src="skill.iconImg"
+                                class="!w-10 !h-10"
+                                :style="
+                                    skill.fg === '#fff'
+                                        ? 'filter: brightness(0) invert(1)'
+                                        : 'filter: none'
+                                "
+                                alt=""
+                            />
+
+                            <strong class="!m-0 !p-0 !tracking-wide">{{
+                                skill.name
+                            }}</strong>
                         </div>
                     </UCard>
-                    <div class="tape"></div>
+
+                    <div
+                        class="absolute -top-3 left-1/2 translate-x-[-50%] rotate-[3deg] !w-20 !h-[22px] !opacity-90 z-20 bg-gradient-to-r from-white/80 via-white/20 to-white/80 shadow-[0_2px_6px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.6)] transition-transform duration-150 group-hover:!translate-x-[calc(-50%+6px)] group-hover:!translate-y-[6px]"
+                    />
                 </div>
             </div>
         </div>
@@ -37,224 +84,50 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
+import { rawSkills } from "@/utils/iconsList";
 
-const sectionRef = ref<HTMLElement | null>(null);
+function pickFg(hex: string) {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return lum > 160 ? "#111" : "#fff";
+}
 
-const skills = [
-    { name: "JAVASCRIPT", icon: "i-lucide:code", color: "yellow" },
-    { name: "TYPESCRIPT", icon: "i-lucide:braces", color: "red" },
-    { name: "REACT", icon: "i-lucide:component", color: "blue" },
-    { name: "VUE.JS", icon: "i-lucide:box", color: "green" },
-    { name: "NODE.JS", icon: "i-lucide:server", color: "orange" },
-    { name: "MONGODB", icon: "i-lucide:database", color: "yellow" },
-    { name: "POSTGRESQL", icon: "i-lucide:database", color: "red" },
-    { name: "NEXT.JS", icon: "i-lucide:globe", color: "blue" },
-    { name: "TAILWIND", icon: "i-lucide:wind", color: "green" },
-    { name: "DOCKER", icon: "i-lucide:cpu", color: "orange" },
-];
+const skills = rawSkills.map((s) => ({ ...s, fg: pickFg(s.brand) }));
 
 onMounted(() => {
-    const cards = document.querySelectorAll<HTMLElement>(".card-wrapper");
+    const cards = Array.from(
+        document.querySelectorAll<HTMLElement>("#skills .group"),
+    );
+
     cards.forEach((card, index) => {
         card.style.transitionDelay = `${index * 0.08}s`;
     });
 
-    const sectionObserver = new IntersectionObserver(
-        ([entry]) => {
-            if (!entry) return;
+    if (!("IntersectionObserver" in window)) {
+        cards.forEach((el) => {
+            el.classList.remove("opacity-0", "-translate-x-[120px]");
+            el.classList.add("!opacity-100", "!translate-x-0");
+        });
+        return;
+    }
 
-            if (entry.isIntersecting) {
-                cards.forEach((card) => card.classList.add("visible"));
-            } else {
-                cards.forEach((card) => card.classList.remove("visible"));
-            }
+    const obs = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target as HTMLElement;
+                el.classList.remove("opacity-0", "-translate-x-[120px]");
+                el.classList.add("!opacity-100", "!translate-x-0");
+                obs.unobserve(el);
+            });
         },
-        {
-            threshold: 0.3,
-        },
+        { threshold: 0.1, rootMargin: "0px 0px -10% 0px" },
     );
 
-    if (sectionRef.value) {
-        sectionObserver.observe(sectionRef.value);
-    }
+    cards.forEach((el) => obs.observe(el));
 });
 </script>
-
-<style scoped>
-.skills {
-    background: #111;
-    padding: 6rem 2rem;
-    color: white;
-}
-
-.skills__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.skills__title {
-    display: inline-block;
-    margin-bottom: 4rem;
-    transform: rotate(-1deg);
-}
-
-.skills__title h2 {
-    font-size: 3rem;
-    font-weight: 900;
-}
-
-.white {
-    color: #fff;
-}
-
-.gradient {
-    background: linear-gradient(90deg, #ffd600, #ff9800);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.underline {
-    width: 100%;
-    height: 6px;
-    background: #ff3b3b;
-}
-
-.skills__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-
-.card-wrapper {
-    position: relative;
-    opacity: 0;
-    transform: translateX(-120px);
-    transition:
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.9s ease;
-}
-
-.card-wrapper.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.shadow-card {
-    position: absolute;
-    inset: 0;
-    background: #000;
-    border: 4px solid #fff;
-    transform: translate(12px, 12px);
-    transition: 0.15s ease;
-}
-
-.skill-card {
-    position: relative;
-    z-index: 1;
-    padding: 2rem;
-    border: 4px solid #fff;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    font-weight: 900;
-    text-align: center;
-    transition: 0.15s ease;
-}
-
-.card-wrapper:hover .skill-card {
-    transform: translate(6px, 6px);
-}
-
-.card-wrapper:hover .shadow-card {
-    transform: translate(6px, 6px);
-}
-
-.skill-card::before {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #000;
-    border-radius: 50%;
-    top: 5px;
-    left: 5px;
-}
-
-.skill-card::after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #000;
-    border-radius: 50%;
-    bottom: 5px;
-    right: 5px;
-}
-
-.card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    font-weight: 900;
-    text-align: center;
-}
-
-.card-wrapper {
-    position: relative;
-}
-
-.tape {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%) rotate(3deg);
-    width: 80px;
-    height: 22px;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(255, 255, 255, 0.2),
-        rgba(255, 255, 255, 0.8)
-    );
-    opacity: 0.9;
-    z-index: 5;
-    box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    transition: 0.15s ease;
-}
-
-.card-wrapper:hover .tape {
-    transform: translate(calc(-50% + 6px), 6px) rotate(3deg);
-}
-
-.yellow {
-    background: #ffd600;
-}
-
-.red {
-    background: #ff4d4d;
-}
-
-.blue {
-    background: #1e6ee7;
-}
-
-.green {
-    background: #00c853;
-}
-
-.orange {
-    background: #ff9800;
-}
-
-@media (max-width: 768px) {
-    .skills__title h2 {
-        font-size: 2rem;
-    }
-}
-</style>
