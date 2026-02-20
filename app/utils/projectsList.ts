@@ -1,6 +1,6 @@
 import schedifyLandingImg from "/assets/imgs/schedifyLandingPage.png";
 import coffeePageImg from "/assets/imgs/coffeePage.png";
-import textConvertImg from "/assets/imgs/projectTextConvert.jpg";
+import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
 
 export type Project = {
