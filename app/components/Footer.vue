@@ -1,7 +1,7 @@
 <template>
     <footer
         id="footer"
-        class="relative bg-black text-white overflow-hidden border-t-8 border-[#ff3b3b] min-h-[65vh] !py-16 !md:py-0"
+        class="relative bg-black text-white overflow-hidden border-t-8 border-[#ff3b3b] min-h-[50vh] !py-10 !md:py-0"
     >
         <div class="absolute inset-0">
             <img
