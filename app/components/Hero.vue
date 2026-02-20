@@ -148,6 +148,7 @@ const downloadCv = () => {
     background: rgba(0, 0, 0, 0.7);
     letter-spacing: 2px;
     max-width: 600px;
+    transform: rotate(-1deg);
 }
 
 .subtitle_highlight {
