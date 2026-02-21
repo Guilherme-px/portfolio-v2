@@ -1,6 +1,6 @@
 <template>
     <UApp>
-        <Analytics mode="production" />
+        <Analytics />
         <NuxtPage />
     </UApp>
 </template>
