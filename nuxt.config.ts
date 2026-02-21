@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: false },
-    modules: ["@nuxt/ui", "@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
+    modules: [
+        "@nuxt/ui",
+        "@nuxt/fonts",
+        "@nuxt/icon",
+        "@nuxt/image",
+        "@vercel/analytics",
+    ],
     css: ["~/assets/css/main.css", "devicon/devicon.min.css"],
     ssr: false,
     fonts: {
