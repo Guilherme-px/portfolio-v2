@@ -1,7 +1,9 @@
 <template>
     <UApp>
-        <Analytics mode="production" />
         <NuxtPage />
+        <ClientOnly>
+            <Analytics mode="production" />
+        </ClientOnly>
     </UApp>
 </template>
 
