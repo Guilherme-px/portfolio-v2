@@ -9,6 +9,11 @@
 import { Analytics } from "@vercel/analytics/nuxt";
 const config = useRuntimeConfig();
 
+useHead({
+  htmlAttrs: { lang: "pt-BR" },
+  meta: [{ name: "author", content: "Guilherme Augusto" }],
+});
+
 const title = "Guilherme Augusto — Front-end Developer";
 const description =
     "Portfólio com projetos em Nuxt/Vue, TypeScript e foco em performance, UI e DX.";
