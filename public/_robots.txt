@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guilherme-augusto-portfolio.vercel.app/sitemap.xml
