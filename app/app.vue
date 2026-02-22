@@ -20,7 +20,7 @@ useHead({
     ],
 });
 
-const title = "Guilherme Augusto — Front-end Developer";
+const title = "Guilherme Augusto — Fullstack Developer";
 const description =
     "Portfólio com projetos em Nuxt/Vue, TypeScript e foco em performance, UI e DX.";
 
