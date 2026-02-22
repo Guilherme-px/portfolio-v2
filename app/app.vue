@@ -10,8 +10,14 @@ import { Analytics } from "@vercel/analytics/nuxt";
 const config = useRuntimeConfig();
 
 useHead({
-  htmlAttrs: { lang: "pt-BR" },
-  meta: [{ name: "author", content: "Guilherme Augusto" }],
+    htmlAttrs: { lang: "pt-BR" },
+    meta: [
+        { name: "author", content: "Guilherme Augusto" },
+        {
+            name: "google-site-verification",
+            content: "MFMIXwfsASH43Rq1ZQAnc7EBRrTzLMu_dGEvN88zeXU",
+        },
+    ],
 });
 
 const title = "Guilherme Augusto — Front-end Developer";
