@@ -2,6 +2,7 @@ import schedifyLandingImg from "/assets/imgs/schedifyLandingPage.png";
 import coffeePageImg from "/assets/imgs/coffeePage.png";
 import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
+import shcedifyB2b from "/assets/imgs/schedifyB2B.png";
 
 export type Project = {
     title: string;
@@ -28,6 +29,27 @@ export const projects: Project[] = [
         // youtubeId: "https://youtu.be/hZUWwN35TLY",
     },
     {
+        title: "GESTÂO DE AGENDAMENTO",
+        description:
+            "Sistema para gestão de agendamentos de serviços no ramo de estetica.",
+        details:
+            "Projeto B2B para gestão de agendamentos de serviços no ramo de estetica com cadastro de funcionarios, grupos de permissões, controle de caixa, comandas de serviços e gestão financeira, funcionalidades baseadas no tier do plano de assinatura via stripe.",
+        image: shcedifyB2b,
+        tags: [
+            "VUE",
+            "PINIA",
+            "VITEST",
+            "CYPRESS",
+            "QUASAR",
+            "STRIPE",
+            "AXIOS",
+            "FULLCALENDAR",
+            "APEXCHARTS",
+        ],
+        color: "red",
+        // youtubeId: "https://youtu.be/hZUWwN35TLY",
+    },
+    {
         title: "CONVERSOR DE TEXTO",
         description:
             "Conversor de texto para transformar conteúdos em diferentes formatos e facilitar tarefas do dia a dia.",
@@ -35,7 +57,7 @@ export const projects: Project[] = [
             "Ferramenta para converter e padronizar textos (cases, slug, limpeza e formatação). UI simples e rápida, com ações de copiar e feedback visual. Cobertura com testes unitários, e2e e pipeline de CI/CD.",
         image: textConvertImg,
         tags: ["VUE", "VITEST", "TAILWINDCSS", "CYPRESS", "CI/CD"],
-        color: "red",
+        color: "blue",
         github: "https://github.com/Guilherme-px/vue-text-convert",
         demo: "https://vue-text-convert.vercel.app/",
     },
@@ -47,7 +69,7 @@ export const projects: Project[] = [
             "Landing page em Vue 2 para divulgação de cafeteria, com seções de destaque e apresentação de produtos. Projeto feito para praticar estruturação de layout e componentização.",
         image: coffeePageImg,
         tags: ["VUE", "VUETIFY", "SASS"],
-        color: "blue",
+        color: "green",
         github: "https://github.com/Guilherme-px/Landing-page-vue-vuetify",
         demo: "https://guilherme-px.github.io/coffee-page/",
     },
@@ -59,7 +81,7 @@ export const projects: Project[] = [
             "Landing page em Vue 3 com foco em layout, responsividade e organização de seções. Inclui cardápio com preços e informações de localização.",
         image: burgPageImg,
         tags: ["VUE", "CSS"],
-        color: "green",
+        color: "yellow",
         github: "https://github.com/Guilherme-px/burguer-page",
         demo: "https://guilherme-px.github.io/burg/",
     },
