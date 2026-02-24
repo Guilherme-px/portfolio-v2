@@ -2,14 +2,14 @@
     <UModal
         v-model:open="openModel"
         overlay
+        fullscreen
         :ui="{
-            content:
-                '!p-0 !rounded-none !shadow-none !ring-0 !bg-transparent !max-w-[70vw]',
+            content: '!p-0 !rounded-none !shadow-none !ring-0 !bg-transparent',
         }"
     >
         <template #content>
             <div
-                class="!bg-white !text-[#111] !border-[2px] !border-black overflow-hidden flex flex-col max-h-[calc(100dvh-1.5rem)]"
+                class="!bg-white !text-[#111] !border-[2px] !border-black overflow-hidden flex flex-col w-screen h-[100dvh] box-border"
             >
                 <div
                     class="flex items-start justify-end gap-4 !p-3 !border-b-[2px] !border-black"
@@ -32,7 +32,7 @@
                         class="min-h-0 grid"
                         :class="
                             hasImage
-                                ? 'grid-cols-1 md:grid-cols-2'
+                                ? 'grid-cols-1 xl:grid-cols-2'
                                 : 'grid-cols-1'
                         "
                     >
@@ -66,7 +66,7 @@
                                     v-else
                                     :src="project!.image"
                                     :alt="project?.title || 'Projeto'"
-                                    class="w-full h-full object-cover"
+                                    class="w-full h-full object-contain"
                                     loading="lazy"
                                     decoding="async"
                                 />
@@ -99,9 +99,15 @@
                                     class="!mt-5 flex flex-wrap !gap-2.5"
                                 >
                                     <span
-                                        v-for="t in project.tags"
-                                        :key="t"
-                                        class="!border-2 !border-black !bg-white !px-2.5 !py-1 !text-black !text-xs !tracking-[0.6px]"
+                                        v-for="(t, i) in project.tags"
+                                        :key="`${t}-${i}`"
+                                        :class="
+                                            getTagClassByProjectColor(
+                                                project.color,
+                                                i,
+                                            )
+                                        "
+                                        class="!border-2 !border-black !px-2.5 !py-1 !text-black !text-xs !tracking-[0.6px]"
                                     >
                                         {{ t }}
                                     </span>
@@ -148,6 +154,7 @@
 
 <script setup lang="ts">
 import type { Project } from "@/utils/projectsList";
+import { getTagClassByProjectColor } from "@/utils/tagsColors";
 
 const props = defineProps<{
     modelValue: boolean;
