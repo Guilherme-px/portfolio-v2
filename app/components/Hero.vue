@@ -14,7 +14,7 @@
             <img
                 src="/assets/imgs/code.png"
                 alt="Code"
-                class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] right-[8%] bottom-[10%] [filter:drop-shadow(0_0_10px_rgba(255,255,255,0.5))] animate-[pulseScale_2.5s_ease-in-out_infinite] max-sm:opacity-40"
+                class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] right-[8%] max-sm:right-[-5%] bottom-[10%] [filter:drop-shadow(0_0_10px_rgba(255,255,255,0.5))] animate-[pulseScale_2.5s_ease-in-out_infinite] max-sm:opacity-40"
             />
 
             <div

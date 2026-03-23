@@ -68,7 +68,7 @@
                         <img
                             :src="p.image"
                             :alt="p.title"
-                            class="block w-full h-auto !border-[3px] !border-black !bg-white !grayscale transition-[filter,transform] duration-200 group-hover:!grayscale-0 group-hover:contrast-[1.05] group-hover:scale-[1.01]"
+                            class="block w-full h-auto !border-[3px] !border-black !bg-white transition-[filter,transform] duration-200 md:!grayscale md:group-hover:!grayscale-0 md:group-hover:contrast-[1.05] md:group-hover:scale-[1.01]"
                         />
                     </div>
 

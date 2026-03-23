@@ -3,6 +3,7 @@ import coffeePageImg from "/assets/imgs/coffeePage.png";
 import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
 import shcedifyB2b from "/assets/imgs/schedifyB2B.png";
+import shcedifyB2c from "/assets/imgs/schedifyB2C.png";
 
 export type Project = {
     title: string;
@@ -26,7 +27,7 @@ export const projects: Project[] = [
         image: schedifyLandingImg,
         tags: ["NEXT", "STRIPE", "ZUSTAND", "ZOD", "REACT HOOK FORM"],
         color: "yellow",
-        // youtubeId: "https://youtu.be/hZUWwN35TLY",
+        youtubeId: "https://www.youtube.com/watch?v=XmQWo_4kMJI",
     },
     {
         title: "GESTÂO DE AGENDAMENTO",
@@ -47,7 +48,29 @@ export const projects: Project[] = [
             "APEXCHARTS",
         ],
         color: "red",
-        // youtubeId: "https://youtu.be/hZUWwN35TLY",
+        youtubeId: "https://www.youtube.com/watch?v=Xf1h8FSNoP4",
+    },
+    {
+        title: "AGENDAMENTO ONLINE",
+        description: "Sistema para agendar serviços online.",
+        details:
+            "Projeto B2C para que usuários possam agendar serviços com empresas próximas à sua localização, favoritar seus lugares preferidos, escolher dia e horário para agendamento e optar por realizar o pagamento de forma online ou presencial, conforme definido pelas empresas que utilizam o serviço.",
+        image: shcedifyB2c,
+        tags: [
+            "NUXT",
+            "PINIA",
+            "VITEST",
+            "CYPRESS",
+            "QUASAR",
+            "STRIPE",
+            "AXIOS",
+            "NUXT UI",
+            "GOOGLE OAUTH",
+            "BIOME",
+            "GOOGLE PLACES",
+        ],
+        color: "blue",
+        // youtubeId: "https://www.youtube.com/watch?v=Xf1h8FSNoP4",
     },
     {
         title: "CONVERSOR DE TEXTO",
@@ -57,7 +80,7 @@ export const projects: Project[] = [
             "Ferramenta para converter e padronizar textos (cases, slug, limpeza e formatação). UI simples e rápida, com ações de copiar e feedback visual. Cobertura com testes unitários, e2e e pipeline de CI/CD.",
         image: textConvertImg,
         tags: ["VUE", "VITEST", "TAILWINDCSS", "CYPRESS", "CI/CD"],
-        color: "blue",
+        color: "green",
         github: "https://github.com/Guilherme-px/vue-text-convert",
         demo: "https://vue-text-convert.vercel.app/",
     },
@@ -69,7 +92,7 @@ export const projects: Project[] = [
             "Landing page em Vue 2 para divulgação de cafeteria, com seções de destaque e apresentação de produtos. Projeto feito para praticar estruturação de layout e componentização.",
         image: coffeePageImg,
         tags: ["VUE", "VUETIFY", "SASS"],
-        color: "green",
+        color: "yellow",
         github: "https://github.com/Guilherme-px/Landing-page-vue-vuetify",
         demo: "https://guilherme-px.github.io/coffee-page/",
     },
@@ -81,7 +104,7 @@ export const projects: Project[] = [
             "Landing page em Vue 3 com foco em layout, responsividade e organização de seções. Inclui cardápio com preços e informações de localização.",
         image: burgPageImg,
         tags: ["VUE", "CSS"],
-        color: "yellow",
+        color: "red",
         github: "https://github.com/Guilherme-px/burguer-page",
         demo: "https://guilherme-px.github.io/burg/",
     },

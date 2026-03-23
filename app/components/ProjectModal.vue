@@ -38,7 +38,7 @@
                     >
                         <div
                             v-if="hasImage"
-                            class="hidden md:block !p-5 md:!border-r-[2px] md:!border-black"
+                            class="block !p-5 md:!border-r-[2px] md:!border-black"
                         >
                             <div
                                 class="!border-[2px] !border-black !bg-black overflow-hidden aspect-video w-full"
