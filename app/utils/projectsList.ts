@@ -2,8 +2,8 @@ import schedifyLandingImg from "/assets/imgs/schedifyLandingPage.png";
 import coffeePageImg from "/assets/imgs/coffeePage.png";
 import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
-import shcedifyB2b from "/assets/imgs/schedifyB2B.png";
-import shcedifyB2c from "/assets/imgs/schedifyB2C.png";
+import schedifyB2b from "/assets/imgs/schedifyB2B.png";
+import schedifyB2c from "/assets/imgs/schedifyB2C.png";
 
 export type Project = {
     title: string;
@@ -35,7 +35,7 @@ export const projects: Project[] = [
             "Sistema para gestão de agendamentos de serviços no ramo de estetica.",
         details:
             "Projeto B2B para gestão de agendamentos de serviços no ramo de estetica com cadastro de funcionarios, grupos de permissões, controle de caixa, comandas de serviços e gestão financeira, funcionalidades baseadas no tier do plano de assinatura via stripe.",
-        image: shcedifyB2b,
+        image: schedifyB2b,
         tags: [
             "VUE",
             "PINIA",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
         description: "Sistema para agendar serviços online.",
         details:
             "Projeto B2C para que usuários possam agendar serviços com empresas próximas à sua localização, favoritar seus lugares preferidos, escolher dia e horário para agendamento e optar por realizar o pagamento de forma online ou presencial, conforme definido pelas empresas que utilizam o serviço.",
-        image: shcedifyB2c,
+        image: schedifyB2c,
         tags: [
             "NUXT",
             "PINIA",
