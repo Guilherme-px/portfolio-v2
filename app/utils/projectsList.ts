@@ -4,6 +4,7 @@ import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
 import schedifyB2b from "/assets/imgs/schedifyB2B.png";
 import schedifyB2c from "/assets/imgs/schedifyB2C.png";
+import petClinixImg from "/assets/imgs/under-construction.svg";
 
 export type ProjectGallery = {
     title: string;
@@ -60,42 +61,42 @@ export const projects: Project[] = [
                         AD[Painel Admin Vue.js]
                         MK[Marketplace Nuxt.js]
                     end
-                            
+
                     subgraph Servicos Externos
                         ST[Stripe API\nConnect]
                         GM[Google Places API]
                     end
-                            
+
                     subgraph "AWS Cloud"
                         APIGateway[API Gateway]
-                            
+
                         subgraph "Lambda Functions - Node/Express"
                             MW[Middlewares\nHelmet, RateLimit, JWT]
                             CTRL[Controllers / Celebrate]
                             SRV[Services / Domain]
                             REPO[Repositories / Prisma]
                         end
-                            
+
                         S3[(AWS S3\nUploads)]
                         SES[(AWS SES\nEmails)]
                     end
-                            
+
                     subgraph Database
                         DB[(MongoDB\nMulti-tenant)]
                     end
-                            
+
                     LP -- Assinatura SaaS --> ST
                     ST -- Webhooks --> APIGateway
                     LP -- Cria Conta --> APIGateway
                     AD -- JWT Auth --> APIGateway
                     MK -- Agendamento / Checkout --> APIGateway
-                            
+
                     APIGateway --> MW
                     MW --> CTRL
                     CTRL --> SRV
                     SRV --> REPO
                     REPO --> DB
-                            
+
                     CTRL -- Upload de Imagem --> S3
                     SRV -- Recuperar Senha --> SES
                     SRV -- Geocode no Cadastro --> GM
@@ -134,7 +135,13 @@ export const projects: Project[] = [
                     "Landing page focada em conversão, com seções de benefícios, planos e CTA. Integração de pagamento com Stripe e validações de formulário. Layout responsivo, otimizado para performance e SEO para melhor indexação.",
                 image: schedifyLandingImg,
                 youtubeId: "https://www.youtube.com/watch?v=XmQWo_4kMJI",
-                tags: ["NEXT", "NODEMAILER", "ZUSTAND", "ZOD", "REACT HOOK FORM"],
+                tags: [
+                    "NEXT",
+                    "NODEMAILER",
+                    "ZUSTAND",
+                    "ZOD",
+                    "REACT HOOK FORM",
+                ],
             },
             {
                 title: "Painel Administrativo",
@@ -173,6 +180,95 @@ export const projects: Project[] = [
                     "BIOME",
                     "GOOGLE PLACES",
                 ],
+            },
+        ],
+    },
+    {
+        title: "PETCLINIX (EM DESENVOLVIMENTO)",
+        description:
+            "Plataforma SaaS multi-tenant para gestão de clínicas veterinárias. Foco em arquitetura modular, DDD e Clean Architecture.",
+        image: petClinixImg,
+        tags: [
+            "C#",
+            ".NET 10",
+            "POSTGRESQL",
+            "CLEAN ARCH",
+            "DDD",
+            "STRIPE",
+            "XUNIT",
+            "DOCKER",
+            "TESTCONTAINERS",
+        ],
+        color: "blue",
+        gallery: [
+            {
+                title: "Arquitetura do Sistema",
+                description:
+                    "Backend construído como um Monólito Modular usando Clean Architecture e DDD. Cada módulo (Identity, Billing) é isolado com suas próprias regras de domínio, casos de uso (CQRS) e infraestrutura. A comunicação entre módulos é desacoplada. Cobertura de testes unitários e de integração (E2E com Testcontainers/Docker).",
+                mermaidCode: `graph TD
+                    subgraph Frontends
+                        LP[Landing Page Vue.js\nFuturo]
+                        AD[Painel Admin Vue.js\nFuturo]
+                    end
+
+                    subgraph "PetClinix API - .NET 10"
+                        APIGateway[API Controllers / Minimal APIs]
+
+                        subgraph "Modular Monolith - DDD"
+                            subgraph "Identity Module"
+                                IApp[Application\nHandlers, Validators]
+                                IDom[Domain\nEntities, VOs]
+                                IInfra[Infrastructure\nEF Core, Repos]
+                            end
+
+                            subgraph "Billing Module"
+                                BApp[Application\nCheckout Handlers]
+                                BDom[Domain\nSubscription Entities]
+                                BInfra[Infrastructure\nStripe SDK]
+                            end
+
+                            BB[Building Blocks\nCQRS, Result, Entity]
+                        end
+                    end
+
+                    subgraph Data & Services
+                        DB[(PostgreSQL)]
+                        ST[Stripe API]
+                    end
+
+                    LP -- Onboarding & Checkout --> APIGateway
+                    AD -- JWT Auth --> APIGateway
+                    ST -- Webhooks --> APIGateway
+
+                    APIGateway --> IApp
+                    APIGateway --> BApp
+                    IApp --> IDom
+                    IInfra --> DB
+                    BInfra --> ST`,
+                tags: [
+                    "MODULAR MONOLITH",
+                    "CLEAN ARCH",
+                    "DDD",
+                    "CQRS",
+                    "SOLID",
+                    "TESTCONTAINERS",
+                ],
+            },
+            {
+                title: "API & Documentação (Em Desenvolvimento)",
+                description:
+                    "API REST construída com .NET 10 e Entity Framework Core 9. Validação de domínio com FluentValidation, controle de multi-tenancy via ClinicId, e integração com Stripe para assinaturas recorrentes. Testes de integração garantem que a API conversa corretamente com o PostgreSQL real via Docker.",
+                swaggerUrl: "/petClinixSwagger.json",
+                tags: [
+                    ".NET 10",
+                    "C#",
+                    "POSTGRESQL",
+                    "EF CORE",
+                    "FLUENTVALIDATION",
+                    "XUNIT",
+                    "STRIPE",
+                ],
+                github: "https://github.com/Guilherme-px/petClinix",
             },
         ],
     },
