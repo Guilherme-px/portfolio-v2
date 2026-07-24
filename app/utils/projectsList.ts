@@ -5,6 +5,18 @@ import burgPageImg from "/assets/imgs/burguerMenu.png";
 import schedifyB2b from "/assets/imgs/schedifyB2B.png";
 import schedifyB2c from "/assets/imgs/schedifyB2C.png";
 
+export type ProjectGallery = {
+    title: string;
+    description: string;
+    image?: string;
+    youtubeId?: string;
+    demo?: string;
+    github?: string;
+    tags: string[];
+    mermaidCode?: string;
+    swaggerUrl?: string;
+};
+
 export type Project = {
     title: string;
     description: string;
@@ -15,62 +27,154 @@ export type Project = {
     github?: string;
     demo?: string;
     youtubeId?: string;
+    gallery?: ProjectGallery[];
 };
 
 export const projects: Project[] = [
     {
-        title: "LANDING PAGE",
+        title: "SCHEDIFY",
         description:
-            "Landing page para apresentar o produto Schedify e permitir a assinatura de um plano.",
-        details:
-            "Landing page focada em conversão, com seções de benefícios, planos e CTA. Integração de pagamento com Stripe e validações de formulário. Layout responsivo, otimizado para performance e SEO para melhor indexação.",
+            "Plataforma SaaS multi-tenant para gestão de estabelecimentos de estética.",
         image: schedifyLandingImg,
-        tags: ["NEXT", "STRIPE", "ZUSTAND", "ZOD", "REACT HOOK FORM"],
-        color: "yellow",
-        youtubeId: "https://www.youtube.com/watch?v=XmQWo_4kMJI",
-    },
-    {
-        title: "GESTÂO DE AGENDAMENTO",
-        description:
-            "Sistema para gestão de agendamentos de serviços no ramo de estetica.",
-        details:
-            "Projeto B2B para gestão de agendamentos de serviços no ramo de estetica com cadastro de funcionarios, grupos de permissões, controle de caixa, comandas de serviços e gestão financeira, funcionalidades baseadas no tier do plano de assinatura via stripe.",
-        image: schedifyB2b,
         tags: [
-            "VUE",
-            "PINIA",
-            "VITEST",
-            "CYPRESS",
-            "QUASAR",
+            "NODE",
+            "MONGODB",
             "STRIPE",
-            "AXIOS",
-            "FULLCALENDAR",
-            "APEXCHARTS",
-        ],
-        color: "red",
-        youtubeId: "https://www.youtube.com/watch?v=Xf1h8FSNoP4",
-    },
-    {
-        title: "AGENDAMENTO ONLINE",
-        description: "Sistema para agendar serviços online.",
-        details:
-            "Projeto B2C para que usuários possam agendar serviços com empresas próximas à sua localização, favoritar seus lugares preferidos, escolher dia e horário para agendamento e optar por realizar o pagamento de forma online ou presencial, conforme definido pelas empresas que utilizam o serviço.",
-        image: schedifyB2c,
-        tags: [
+            "TYPESCRIPT",
+            "NEXT",
+            "REACT",
             "NUXT",
-            "PINIA",
-            "VITEST",
-            "CYPRESS",
-            "QUASAR",
-            "STRIPE",
-            "AXIOS",
-            "NUXT UI",
-            "GOOGLE OAUTH",
-            "BIOME",
-            "GOOGLE PLACES",
+            "SERVERLESS",
+            "AWS",
         ],
-        color: "blue",
-        // youtubeId: "https://www.youtube.com/watch?v=Xf1h8FSNoP4",
+        color: "yellow",
+        gallery: [
+            {
+                title: "Arquitetura do Sistema",
+                description:
+                    "O Schedify é dividido em 4 pilares. A landing page capta e cobra via Stripe. A API gerencia o banco de dados isolado (multi-tenant). O Admin gerencia e o Marketplace permite o agendamento pelo cliente final.",
+                image: schedifyLandingImg,
+                mermaidCode: `graph TD
+                    subgraph Frontends
+                        LP[Landing Page Next.js]
+                        AD[Painel Admin Vue.js]
+                        MK[Marketplace Nuxt.js]
+                    end
+                            
+                    subgraph Servicos Externos
+                        ST[Stripe API\nConnect]
+                        GM[Google Places API]
+                    end
+                            
+                    subgraph "AWS Cloud"
+                        APIGateway[API Gateway]
+                            
+                        subgraph "Lambda Functions - Node/Express"
+                            MW[Middlewares\nHelmet, RateLimit, JWT]
+                            CTRL[Controllers / Celebrate]
+                            SRV[Services / Domain]
+                            REPO[Repositories / Prisma]
+                        end
+                            
+                        S3[(AWS S3\nUploads)]
+                        SES[(AWS SES\nEmails)]
+                    end
+                            
+                    subgraph Database
+                        DB[(MongoDB\nMulti-tenant)]
+                    end
+                            
+                    LP -- Assinatura SaaS --> ST
+                    ST -- Webhooks --> APIGateway
+                    LP -- Cria Conta --> APIGateway
+                    AD -- JWT Auth --> APIGateway
+                    MK -- Agendamento / Checkout --> APIGateway
+                            
+                    APIGateway --> MW
+                    MW --> CTRL
+                    CTRL --> SRV
+                    SRV --> REPO
+                    REPO --> DB
+                            
+                    CTRL -- Upload de Imagem --> S3
+                    SRV -- Recuperar Senha --> SES
+                    SRV -- Geocode no Cadastro --> GM
+                    SRV -- Split de Pagamento --> ST`,
+                tags: [
+                    "ARQUITETURA",
+                    "MULTI-TENANT",
+                    "JWT",
+                    "WEBHOOKS",
+                    "STRIPE CONNECT",
+                ],
+            },
+            {
+                title: "API & Documentação",
+                description:
+                    "Core do sistema construído com Clean Architecture e DDD. API REST Serverless (AWS Lambda via Express) responsável por gerenciar o banco MongoDB (Prisma ORM) multi-tenant. Conta com middlewares de segurança (Helmet, Rate Limiting), validações (Celebrate), upload de imagens (S3), envio de e-mails (SES), integração Google Maps e webhooks de pagamento do Stripe. Cobertura de testes unitários e de integração com Jest.",
+                swaggerUrl: "/swagger.json",
+                tags: [
+                    "NODE",
+                    "MONGODB",
+                    "PRISMA",
+                    "AWS LAMBDA",
+                    "AWS S3",
+                    "AWS SES",
+                    "CLEAN ARCH",
+                    "DDD",
+                    "JEST",
+                    "HELMET",
+                    "SWAGGER",
+                    "STRIPE CONNECT",
+                ],
+            },
+            {
+                title: "Landing Page",
+                description:
+                    "Landing page focada em conversão, com seções de benefícios, planos e CTA. Integração de pagamento com Stripe e validações de formulário. Layout responsivo, otimizado para performance e SEO para melhor indexação.",
+                image: schedifyLandingImg,
+                youtubeId: "https://www.youtube.com/watch?v=XmQWo_4kMJI",
+                tags: ["NEXT", "NODEMAILER", "ZUSTAND", "ZOD", "REACT HOOK FORM"],
+            },
+            {
+                title: "Painel Administrativo",
+                description:
+                    "Projeto B2B para gestão de agendamentos de serviços no ramo de estetica com cadastro de funcionarios, grupos de permissões, controle de caixa, comandas de serviços e gestão financeira, funcionalidades baseadas no tier do plano de assinatura via stripe.",
+                image: schedifyB2b,
+                youtubeId: "https://www.youtube.com/watch?v=Xf1h8FSNoP4",
+                tags: [
+                    "VUE 3",
+                    "PINIA",
+                    "VITEST",
+                    "CYPRESS",
+                    "QUASAR",
+                    "STRIPE",
+                    "AXIOS",
+                    "FULLCALENDAR",
+                    "APEXCHARTS",
+                ],
+            },
+            {
+                title: "Marketplace",
+                description:
+                    "Projeto B2C para que usuários possam agendar serviços com empresas próximas à sua localização, favoritar seus lugares preferidos, escolher dia e horário para agendamento e optar por realizar o pagamento de forma online ou presencial, conforme definido pelas empresas que utilizam o serviço.",
+                image: schedifyB2c,
+                // youtubeId: "https://www.youtube.com/watch?v=XmQWo_4kMJI",
+                tags: [
+                    "NUXT",
+                    "PINIA",
+                    "VITEST",
+                    "CYPRESS",
+                    "QUASAR",
+                    "STRIPE",
+                    "AXIOS",
+                    "NUXT UI",
+                    "GOOGLE OAUTH",
+                    "BIOME",
+                    "GOOGLE PLACES",
+                ],
+            },
+        ],
     },
     {
         title: "CONVERSOR DE TEXTO",
