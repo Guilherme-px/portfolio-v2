@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     },
     icon: {
         collections: ["uil", "lucide"],
+        serverBundle: "remote",
     },
     runtimeConfig: {
         public: {
