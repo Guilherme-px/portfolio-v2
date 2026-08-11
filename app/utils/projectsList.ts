@@ -195,6 +195,8 @@ export const projects: Project[] = [
             "CLEAN ARCH",
             "DDD",
             "STRIPE",
+            "JWT",
+            "RBAC",
             "XUNIT",
             "DOCKER",
             "TESTCONTAINERS",
@@ -204,7 +206,7 @@ export const projects: Project[] = [
             {
                 title: "Arquitetura do Sistema",
                 description:
-                    "Backend construído como um Monólito Modular usando Clean Architecture e DDD. Cada módulo (Identity, Billing) é isolado com suas próprias regras de domínio, casos de uso (CQRS) e infraestrutura. A comunicação entre módulos é desacoplada. Cobertura de testes unitários e de integração (E2E com Testcontainers/Docker).",
+                    "Backend construído como um Monólito Modular usando Clean Architecture, DDD e CQRS. Os módulos (Identity, Billing) possuem regras de domínio e infraestrutura isoladas, comunicando-se de forma desacoplada. Inclui autenticação JWT com Refresh Tokens, controle de acesso por Role (RBAC), operações atômicas com Unit of Work, integração completa com Stripe (Checkout, Webhooks e Billing Portal) e envio de e-mails transacionais via Resend. Tudo blindado por testes unitários e E2E (Testcontainers/Docker).",
                 mermaidCode: `graph TD
                     subgraph Frontends
                         LP[Landing Page Vue.js\nFuturo]
@@ -212,7 +214,7 @@ export const projects: Project[] = [
                     end
 
                     subgraph "PetClinix API - .NET 10"
-                        APIGateway[API Controllers / Minimal APIs]
+                        APIGateway[API Controllers / Auth / RBAC]
 
                         subgraph "Modular Monolith - DDD"
                             subgraph "Identity Module"
@@ -222,35 +224,43 @@ export const projects: Project[] = [
                             end
 
                             subgraph "Billing Module"
-                                BApp[Application\nCheckout Handlers]
+                                BApp[Application\nBilling Handlers]
                                 BDom[Domain\nSubscription Entities]
                                 BInfra[Infrastructure\nStripe SDK]
                             end
 
-                            BB[Building Blocks\nCQRS, Result, Entity]
+                            BB[Building Blocks\nCQRS, Result, Entity, UoW]
                         end
+
+                        EmailSvc[Email Service\nResend Integration]
                     end
 
                     subgraph Data & Services
                         DB[(PostgreSQL)]
-                        ST[Stripe API]
+                        ST[Stripe API\nCheckout & Webhooks]
+                        RE[Resend API\nEmails]
                     end
 
                     LP -- Onboarding & Checkout --> APIGateway
-                    AD -- JWT Auth --> APIGateway
+                    AD -- JWT Auth & RBAC --> APIGateway
                     ST -- Webhooks --> APIGateway
 
                     APIGateway --> IApp
                     APIGateway --> BApp
                     IApp --> IDom
                     IInfra --> DB
-                    BInfra --> ST`,
+                    BInfra --> ST
+
+                    IApp -- Welcome / Reset --> EmailSvc
+                    EmailSvc --> RE`,
                 tags: [
                     "MODULAR MONOLITH",
                     "CLEAN ARCH",
                     "DDD",
                     "CQRS",
                     "SOLID",
+                    "JWT",
+                    "RBAC",
                     "TESTCONTAINERS",
                 ],
             },
@@ -265,6 +275,8 @@ export const projects: Project[] = [
                     "POSTGRESQL",
                     "EF CORE",
                     "FLUENTVALIDATION",
+                    "JWT",
+                    "RESEND",
                     "XUNIT",
                     "STRIPE",
                 ],
