@@ -225,6 +225,17 @@
                             </UButton>
 
                             <UButton
+                                v-if="item.apiDemo"
+                                :to="item.apiDemo"
+                                target="_blank"
+                                variant="solid"
+                                icon="i-lucide-external-link"
+                                class="!w-fit !rounded-none !font-bold !tracking-[1px] !px-[1.2rem] !py-[0.6rem] !border-2 !border-black !transition-transform !duration-150 hover:!-translate-x-[2px] hover:!-translate-y-[2px] hover:![box-shadow:4px_4px_0_#000] !bg-[#ffd500de] !text-black"
+                            >
+                                ACESSAR API
+                            </UButton>
+
+                            <UButton
                                 v-if="item.github"
                                 :to="item.github"
                                 target="_blank"

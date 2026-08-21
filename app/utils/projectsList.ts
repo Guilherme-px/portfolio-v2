@@ -12,6 +12,7 @@ export type ProjectGallery = {
     image?: string;
     youtubeId?: string;
     demo?: string;
+    apiDemo?: string;
     github?: string;
     tags: string[];
     mermaidCode?: string;
@@ -184,9 +185,9 @@ export const projects: Project[] = [
         ],
     },
     {
-        title: "PETCLINIX (EM DESENVOLVIMENTO)",
+        title: "PETCLINIX",
         description:
-            "Plataforma SaaS multi-tenant para gestão de clínicas veterinárias. Foco em arquitetura modular, DDD e Clean Architecture.",
+            "Plataforma SaaS multi-tenant para gestão de clínicas veterinárias. Foco em arquitetura modular, DDD, Clean Architecture e CQRS.",
         image: petClinixImg,
         tags: [
             "C#",
@@ -194,9 +195,11 @@ export const projects: Project[] = [
             "POSTGRESQL",
             "CLEAN ARCH",
             "DDD",
+            "CQRS",
             "STRIPE",
             "JWT",
             "RBAC",
+            "RESEND",
             "XUNIT",
             "DOCKER",
             "TESTCONTAINERS",
@@ -206,53 +209,71 @@ export const projects: Project[] = [
             {
                 title: "Arquitetura do Sistema",
                 description:
-                    "Backend construído como um Monólito Modular usando Clean Architecture, DDD e CQRS. Os módulos (Identity, Billing) possuem regras de domínio e infraestrutura isoladas, comunicando-se de forma desacoplada. Inclui autenticação JWT com Refresh Tokens, controle de acesso por Role (RBAC), operações atômicas com Unit of Work, integração completa com Stripe (Checkout, Webhooks e Billing Portal) e envio de e-mails transacionais via Resend. Tudo blindado por testes unitários e E2E (Testcontainers/Docker).",
+                    "Backend construído como um Monólito Modular usando Clean Architecture, DDD e CQRS. Os módulos (Identity, Billing, Pets, Catalog, Appointments) possuem regras de domínio e infraestrutura isoladas, comunicando-se de forma desacoplada. Inclui autenticação JWT com Refresh Tokens, RBAC, operações atômicas com Unit of Work, Idempotência de Webhooks, Concorrência Otimista (RowVersion), e integridade referencial inter-módulos. Tudo blindado por testes unitários e E2E (Testcontainers/Docker).",
+                image: petClinixImg,
                 mermaidCode: `graph TD
-                    subgraph Frontends
-                        LP[Landing Page Vue.js\nFuturo]
-                        AD[Painel Admin Vue.js\nFuturo]
-                    end
+                subgraph Frontends
+                    LP[Landing Page Vue.js\nFuturo]
+                    AD[Painel Admin Vue.js\nFuturo]
+                end
 
-                    subgraph "PetClinix API - .NET 10"
-                        APIGateway[API Controllers / Auth / RBAC]
+                subgraph "PetClinix API - .NET 10"
+                    APIGateway[API Controllers / Auth / RBAC]
 
-                        subgraph "Modular Monolith - DDD"
-                            subgraph "Identity Module"
-                                IApp[Application\nHandlers, Validators]
-                                IDom[Domain\nEntities, VOs]
-                                IInfra[Infrastructure\nEF Core, Repos]
-                            end
-
-                            subgraph "Billing Module"
-                                BApp[Application\nBilling Handlers]
-                                BDom[Domain\nSubscription Entities]
-                                BInfra[Infrastructure\nStripe SDK]
-                            end
-
-                            BB[Building Blocks\nCQRS, Result, Entity, UoW]
+                    subgraph "Modular Monolith - DDD"
+                        subgraph "Identity Module"
+                            IApp[Application\nHandlers, Validators]
+                            IDom[Domain\nUsers, Clinics]
+                            IInfra[Infrastructure\nEF Core, Repos]
                         end
 
-                        EmailSvc[Email Service\nResend Integration]
+                        subgraph "Billing Module"
+                            BApp[Application\nBilling Handlers]
+                            BDom[Domain\nSubscription Entities]
+                            BInfra[Infrastructure\nStripe SDK, Idempotency]
+                        end
+
+                        subgraph "Pets & Catalog Modules"
+                            PApp[Application\nPets & Services]
+                            PDom[Domain\nTutors, Pets, Services]
+                            PInfra[Infrastructure\nEF Core]
+                        end
+
+                        subgraph "Appointments Module"
+                            AApp[Application\nScheduling, Slots]
+                            ADom[Domain\nAppointment, Status]
+                            AInfra[Infrastructure\nRowVersion Concurrency]
+                        end
+
+                        BB[Building Blocks\nCQRS, Result, Entity, UoW]
                     end
 
-                    subgraph Data & Services
-                        DB[(PostgreSQL)]
-                        ST[Stripe API\nCheckout & Webhooks]
-                        RE[Resend API\nEmails]
-                    end
+                    EmailSvc[Email Service\nResend Integration]
+                end
 
-                    LP -- Onboarding & Checkout --> APIGateway
-                    AD -- JWT Auth & RBAC --> APIGateway
-                    ST -- Webhooks --> APIGateway
+                subgraph Data & Services
+                    DB[(PostgreSQL)]
+                    ST[Stripe API\nCheckout & Webhooks]
+                    RE[Resend API\nEmails]
+                end
 
-                    APIGateway --> IApp
-                    APIGateway --> BApp
-                    IApp --> IDom
-                    IInfra --> DB
-                    BInfra --> ST
+                LP -- Onboarding & Checkout --> APIGateway
+                AD -- JWT Auth & RBAC --> APIGateway
+                ST -- Webhooks --> APIGateway
 
-                    IApp -- Welcome / Reset --> EmailSvc
-                    EmailSvc --> RE`,
+                APIGateway --> IApp
+                APIGateway --> BApp
+                APIGateway --> PApp
+                APIGateway --> AApp
+
+                IApp --> IDom
+                IInfra --> DB
+                BInfra --> ST
+                PInfra --> DB
+                AInfra --> DB
+
+                IApp -- Welcome / Reset --> EmailSvc
+                EmailSvc --> RE`,
                 tags: [
                     "MODULAR MONOLITH",
                     "CLEAN ARCH",
@@ -265,9 +286,9 @@ export const projects: Project[] = [
                 ],
             },
             {
-                title: "API & Documentação (Em Desenvolvimento)",
+                title: "API & Documentação",
                 description:
-                    "API REST construída com .NET 10 e Entity Framework Core 9. Validação de domínio com FluentValidation, controle de multi-tenancy via ClinicId, e integração com Stripe para assinaturas recorrentes. Testes de integração garantem que a API conversa corretamente com o PostgreSQL real via Docker.",
+                    "API REST construída com .NET 10 e Entity Framework Core 9. Validação de domínio com FluentValidation, controle de multi-tenancy via ClinicId, e integração completa com Stripe (Checkout, Webhooks Idempotentes, Billing Portal). Segurança com JWT, Refresh Tokens e Rate Limiting. O deploy foi feito via Docker no Render, com migrations automáticas no startup.",
                 swaggerUrl: "/petClinixSwagger.json",
                 tags: [
                     ".NET 10",
@@ -281,6 +302,8 @@ export const projects: Project[] = [
                     "STRIPE",
                 ],
                 github: "https://github.com/Guilherme-px/petClinix",
+                apiDemo:
+                    "https://petclinix.onrender.com/swagger/v1/swagger.json",
             },
         ],
     },
