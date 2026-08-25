@@ -326,7 +326,7 @@ export const projects: Project[] = [
         details:
             "Landing page em Vue 2 para divulgação de cafeteria, com seções de destaque e apresentação de produtos. Projeto feito para praticar estruturação de layout e componentização.",
         image: coffeePageImg,
-        tags: ["VUE", "VUETIFY", "SASS"],
+        tags: ["VUE", "VUETIFY", "SaaS"],
         color: "yellow",
         github: "https://github.com/Guilherme-px/Landing-page-vue-vuetify",
         demo: "https://guilherme-px.github.io/coffee-page/",
