@@ -301,7 +301,7 @@ export const projects: Project[] = [
                     "XUNIT",
                     "STRIPE",
                 ],
-                github: "https://github.com/Guilherme-px/petClinix",
+                github: "https://github.com/Guilherme-px/petClinix-API",
                 apiDemo:
                     "https://petclinix.onrender.com/swagger/v1/swagger.json",
             },
