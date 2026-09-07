@@ -320,16 +320,16 @@ export const projects: Project[] = [
         demo: "https://vue-text-convert.vercel.app/",
     },
     {
-        title: "LANDING PAGE",
+        title: "CAFÉ AUBE — LANDING PAGE",
         description:
-            "Projeto em Vue.js 2, criado no início dos meus estudos com Vue. É uma landing page simples para divulgar uma cafeteria e seus produtos.",
+            "Landing page de uma cafeteria fictícia de Montréal com 100% de cobertura de testes.",
         details:
-            "Landing page em Vue 2 para divulgação de cafeteria, com seções de destaque e apresentação de produtos. Projeto feito para praticar estruturação de layout e componentização.",
+            "Landing page SSG com Nuxt 4 e Nuxt UI: carrossel com autoplay e swipe, animações de reveal, fuso horário real de Montréal calculado no cliente e scrollspy. Todo o conteúdo vive em um único arquivo de configuração, e cada componente tem testes com Vitest em dois projetos (unit e nuxt), com thresholds de 100% de cobertura forçando qualquer código novo a nascer testado.",
         image: coffeePageImg,
-        tags: ["VUE", "VUETIFY", "SaaS"],
+        tags: ["NUXT", "TYPESCRIPT", "NUXT-UI", "VITEST", "NUXTJS-SEO"],
         color: "yellow",
-        github: "https://github.com/Guilherme-px/Landing-page-vue-vuetify",
-        demo: "https://guilherme-px.github.io/coffee-page/",
+        github: "https://github.com/Guilherme-px/coffee-page-v2",
+        demo: "https://aube-coffee.vercel.app/",
     },
     {
         title: "LANDING PAGE",
