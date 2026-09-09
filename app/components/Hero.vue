@@ -72,7 +72,7 @@
                 <UButton
                     size="md"
                     trailing-icon="i-lucide-download"
-                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-blue-500 !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150"
+                    class="!px-6 !py-[0.9rem] !rounded-none !font-bold tracking-[1px] !border-2 !border-black min-w-[180px] !bg-blue-500 !text-black hover:!translate-x-[-3px] hover:!translate-y-[-3px] hover:!shadow-[4px_4px_0_#000] !transition-[transform,box-shadow] !duration-150 hidden"
                     @click="downloadCv"
                 >
                     CURRÍCULO

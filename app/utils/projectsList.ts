@@ -4,7 +4,7 @@ import textConvertImg from "/assets/imgs/projectTextConvert.png";
 import burgPageImg from "/assets/imgs/burguerMenu.png";
 import schedifyB2b from "/assets/imgs/schedifyB2B.png";
 import schedifyB2c from "/assets/imgs/schedifyB2C.png";
-import petClinixImg from "/assets/imgs/under-construction.svg";
+import petClinixImg from "/assets/imgs/petclinix.png";
 
 export type ProjectGallery = {
     title: string;
@@ -304,6 +304,25 @@ export const projects: Project[] = [
                 github: "https://github.com/Guilherme-px/petClinix-API",
                 apiDemo:
                     "https://petclinix.onrender.com/swagger/v1/swagger.json",
+            },
+            {
+                title: "Painel Administrativo (Em desenvolvimento)",
+                description:
+                    "Interface SPA para gestão de clínicas veterinárias (SaaS multi-tenant). Construída com Vue 3, TypeScript e Quasar UI. Implementa uma arquitetura em camadas (Domain, Application, Infrastructure) com Injeção de Dependência e inversão de controle no frontend. Possui gerenciamento de estado reativo com Pinia, interceptadores Axios para renovação transparente de tokens JWT, Router Guards para segurança de rotas, UI responsiva (Mobile First) e testes unitários com Vitest.",
+                tags: [
+                    "VUE 3",
+                    "TYPESCRIPT",
+                    "QUASAR",
+                    "PINIA",
+                    "VUE ROUTER",
+                    "AXIOS",
+                    "JWT",
+                    "VITEST",
+                    "CLEAN ARCH",
+                    "Cypress",
+                ],
+                image: petClinixImg,
+                github: "https://github.com/Guilherme-px/petClinix-Admin",
             },
         ],
     },
