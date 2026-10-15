@@ -72,29 +72,19 @@
         ],
         "parameters": [
           {
-            "name": "date",
+            "name": "startDate",
             "in": "query",
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date"
             }
           },
           {
-            "name": "pageNumber",
+            "name": "endDate",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 50
+              "type": "string",
+              "format": "date"
             }
           }
         ],
@@ -393,6 +383,13 @@
               "format": "int32",
               "default": 1
             }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -478,6 +475,18 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/clinics/me/veterinarians": {
+      "get": {
+        "tags": [
+          "Clinics"
         ],
         "responses": {
           "200": {
@@ -588,6 +597,13 @@
               "type": "integer",
               "format": "int32",
               "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -761,6 +777,13 @@
               "format": "int32",
               "default": 10
             }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -884,6 +907,13 @@
               "type": "integer",
               "format": "int32",
               "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1151,14 +1181,13 @@
     "schemas": {
       "AppointmentStatus": {
         "enum": [
-          1,
-          2,
-          3,
-          4,
-          5
+          "Scheduled",
+          "Confirmed",
+          "Completed",
+          "Canceled",
+          "NoShow"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "CreateCheckoutSessionRequest": {
         "type": "object",
@@ -1212,11 +1241,10 @@
       },
       "PetSex": {
         "enum": [
-          1,
-          2
+          "Male",
+          "Female"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "RefreshTokenRequest": {
         "type": "object",
@@ -1247,9 +1275,13 @@
             "type": "string",
             "format": "uuid"
           },
-          "scheduledDateUtc": {
+          "date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "format": "time"
           },
           "notes": {
             "type": "string",
@@ -1498,15 +1530,14 @@
       },
       "Species": {
         "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
+          "Dog",
+          "Cat",
+          "Bird",
+          "Reptile",
+          "Rodent",
+          "Other"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "UpdateAccountRequest": {
         "type": "object",
@@ -1522,6 +1553,10 @@
           "userBirthDate": {
             "type": "string",
             "format": "date"
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
           },
           "clinicTradeName": {
             "type": "string",
@@ -1585,9 +1620,13 @@
             "type": "string",
             "format": "uuid"
           },
-          "scheduledDateUtc": {
+          "date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "format": "time"
           },
           "notes": {
             "type": "string",
