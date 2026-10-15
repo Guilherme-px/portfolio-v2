@@ -1,10 +1,11 @@
-import schedifyLandingImg from "/assets/imgs/schedifyLandingPage.png";
-import coffeePageImg from "/assets/imgs/coffeePage.png";
-import textConvertImg from "/assets/imgs/projectTextConvert.png";
-import burgPageImg from "/assets/imgs/burguerMenu.png";
-import schedifyB2b from "/assets/imgs/schedifyB2B.png";
-import schedifyB2c from "/assets/imgs/schedifyB2C.png";
-import petClinixImg from "/assets/imgs/petclinix.png";
+import schedifyLandingImg from "/imgs/schedifyLandingPage.png";
+import coffeePageImg from "/imgs/coffeePage.png";
+import textConvertImg from "/imgs/projectTextConvert.png";
+import burgPageImg from "/imgs/burguerMenu.png";
+import schedifyB2b from "/imgs/schedifyB2B.png";
+import schedifyB2c from "/imgs/schedifyB2C.png";
+import petClinixImg from "/imgs/petclinix.png";
+import petClinixAppointmentImg from "/imgs/petclinixAppointment.png";
 
 export type ProjectGallery = {
     title: string;
@@ -194,15 +195,11 @@ export const projects: Project[] = [
             ".NET 10",
             "POSTGRESQL",
             "CLEAN ARCH",
-            "DDD",
-            "CQRS",
+            "VUE",
             "STRIPE",
-            "JWT",
             "RBAC",
-            "RESEND",
             "XUNIT",
             "DOCKER",
-            "TESTCONTAINERS",
         ],
         color: "blue",
         gallery: [
@@ -210,7 +207,6 @@ export const projects: Project[] = [
                 title: "Arquitetura do Sistema",
                 description:
                     "Backend construído como um Monólito Modular usando Clean Architecture, DDD e CQRS. Os módulos (Identity, Billing, Pets, Catalog, Appointments) possuem regras de domínio e infraestrutura isoladas, comunicando-se de forma desacoplada. Inclui autenticação JWT com Refresh Tokens, RBAC, operações atômicas com Unit of Work, Idempotência de Webhooks, Concorrência Otimista (RowVersion), e integridade referencial inter-módulos. Tudo blindado por testes unitários e E2E (Testcontainers/Docker).",
-                image: petClinixImg,
                 mermaidCode: `graph TD
                 subgraph Frontends
                     LP[Landing Page Vue.js\nFuturo]
@@ -306,7 +302,7 @@ export const projects: Project[] = [
                     "https://petclinix.onrender.com/swagger/v1/swagger.json",
             },
             {
-                title: "Painel Administrativo (Em desenvolvimento)",
+                title: "Painel Administrativo",
                 description:
                     "Interface SPA para gestão de clínicas veterinárias (SaaS multi-tenant). Construída com Vue 3, TypeScript e Quasar UI. Implementa uma arquitetura em camadas (Domain, Application, Infrastructure) com Injeção de Dependência e inversão de controle no frontend. Possui gerenciamento de estado reativo com Pinia, interceptadores Axios para renovação transparente de tokens JWT, Router Guards para segurança de rotas, UI responsiva (Mobile First) e testes unitários com Vitest.",
                 tags: [
@@ -320,9 +316,11 @@ export const projects: Project[] = [
                     "VITEST",
                     "CLEAN ARCH",
                     "Cypress",
+                    "FULLCALENDAR",
                 ],
-                image: petClinixImg,
+                image: petClinixAppointmentImg,
                 github: "https://github.com/Guilherme-px/petClinix-Admin",
+                demo: "https://pet-clinix-admin.vercel.app/",
             },
         ],
     },
