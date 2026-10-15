@@ -190,14 +190,41 @@
                                         />
                                     </ClientOnly>
 
-                                    <img
+                                    <template v-else-if="item.image">
+                                        <div class="relative w-full h-full">
+                                            <NuxtImg
+                                                :src="item.image"
+                                                :alt="item.title"
+                                                class="w-full h-full object-contain cursor-zoom-in"
+                                                sizes="sm:100vw md:50vw xl:45vw"
+                                                densities="1x 2x"
+                                                quality="85"
+                                                format="webp"
+                                                @click="
+                                                    lightboxImage = item.image
+                                                "
+                                            />
+                                            <UButton
+                                                @click="
+                                                    lightboxImage = item.image
+                                                "
+                                                icon="i-lucide-maximize"
+                                                size="xs"
+                                                class="absolute top-2 right-2 z-10 !border-2 !bg-white !border-black !rounded-none !font-bold !text-black hover:!bg-gray-300 !py-1 !px-1"
+                                            >
+                                                Expandir
+                                            </UButton>
+                                        </div>
+                                    </template>
+                                    <div
                                         v-else
-                                        :src="item.image"
-                                        :alt="item.title"
-                                        class="w-full h-full object-contain"
-                                        loading="lazy"
-                                        decoding="async"
-                                    />
+                                        class="w-full h-full flex items-center justify-center bg-black text-white"
+                                    >
+                                        <UIcon
+                                            name="i-lucide-image-off"
+                                            class="text-3xl"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -249,6 +276,24 @@
                     </div>
                 </div>
             </div>
+            <div
+                v-if="lightboxImage"
+                class="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center !p-4 md:!p-10 cursor-zoom-out"
+                @click="lightboxImage = null"
+            >
+                <UButton
+                    icon="i-lucide-x"
+                    aria-label="Fechar imagem"
+                    class="absolute top-4 right-4 !border-2 !bg-white !border-black !rounded-none !font-bold !text-black hover:!bg-gray-300"
+                    @click.stop="lightboxImage = null"
+                />
+                <img
+                    :src="lightboxImage"
+                    :alt="project?.title ?? 'Imagem do projeto'"
+                    class="max-w-full max-h-full w-auto h-auto object-contain select-none"
+                    @click.stop
+                />
+            </div>
         </template>
     </UModal>
 </template>
@@ -278,6 +323,7 @@ const hasGallery = computed(
 
 const swaggerContainer = ref<HTMLElement | null>(null);
 const mermaidContainer = ref<HTMLElement | null>(null);
+const lightboxImage = ref<string | null>(null);
 const isMermaidLoading = ref(false);
 
 const displayItems = computed<ProjectGallery[]>(() => {
@@ -302,6 +348,24 @@ const displayItems = computed<ProjectGallery[]>(() => {
         ];
     }
     return [];
+});
+
+function onLightboxKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+        // capture phase: impede que esse ESC feche o modal por baixo
+        e.stopImmediatePropagation();
+        lightboxImage.value = null;
+    }
+}
+
+watch(lightboxImage, (val) => {
+    if (!import.meta.client) return;
+    if (val) window.addEventListener("keydown", onLightboxKeydown, true);
+    else window.removeEventListener("keydown", onLightboxKeydown, true);
+});
+
+watch(openModel, (v) => {
+    if (!v) lightboxImage.value = null;
 });
 
 watch([openModel, displayItems], async ([isOpen]) => {
@@ -426,6 +490,11 @@ function toggleSwaggerFullscreen() {
         document.exitFullscreen();
     }
 }
+
+onBeforeUnmount(() => {
+    if (import.meta.client)
+        window.removeEventListener("keydown", onLightboxKeydown, true);
+});
 </script>
 
 <style scoped>
