@@ -1,19 +1,35 @@
 <template>
     <section
         id="hero"
-        class="relative min-h-screen !px-6 !py-8 overflow-hidden text-white text-center grid [grid-template-rows:1fr_auto] bg-[url('/assets/imgs/hero.jpg')] bg-center bg-cover"
+        class="relative min-h-screen !px-6 !py-8 overflow-hidden text-white text-center grid [grid-template-rows:1fr_auto]"
     >
+        <NuxtImg
+            src="/imgs/hero.jpg"
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            preload
+            fetchpriority="high"
+            sizes="sm:100vw xl:1920px"
+            quality="70"
+            format="webp"
+        />
+
         <div class="absolute inset-0 bg-black/65 z-0" />
 
         <div class="relative z-10 flex flex-col items-center justify-center">
-            <img
-                src="/assets/imgs/js.png"
+            <NuxtImg
+                src="/imgs/js.png"
                 alt="JavaScript"
+                width="160"
+                format="webp"
                 class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] left-[5%] top-[5%] rotate-[-20deg] [filter:drop-shadow(0_0_10px_rgba(247,223,30,0.5))] animate-[float_3s_ease-in-out_infinite] max-sm:opacity-40"
             />
-            <img
-                src="/assets/imgs/code.png"
+
+            <NuxtImg
+                src="/imgs/code.png"
                 alt="Code"
+                width="160"
+                format="webp"
                 class="absolute z-10 pointer-events-none w-[clamp(50px,6vw,80px)] right-[8%] max-sm:right-[-5%] bottom-[10%] [filter:drop-shadow(0_0_10px_rgba(255,255,255,0.5))] animate-[pulseScale_2.5s_ease-in-out_infinite] max-sm:opacity-40"
             />
 

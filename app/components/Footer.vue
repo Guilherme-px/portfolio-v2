@@ -4,10 +4,13 @@
         class="relative bg-black text-white overflow-hidden border-t-8 border-[#ff3b3b] min-h-[50vh] !py-10 !md:py-0"
     >
         <div class="absolute inset-0">
-            <img
-                src="/assets/imgs/hero.jpg"
+            <NuxtImg
+                src="/imgs/hero.jpg"
                 class="w-full h-full object-cover opacity-30"
-                alt=""
+                loading="lazy"
+                sizes="sm:100vw xl:1920px"
+                quality="60"
+                format="webp"
             />
             <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         </div>

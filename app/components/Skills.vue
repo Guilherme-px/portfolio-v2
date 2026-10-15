@@ -56,10 +56,14 @@
                                 class="!text-[40px] !leading-none !text-[color:var(--fg)]"
                             />
 
-                            <img
+                            <NuxtImg
                                 v-else-if="skill.iconImg"
                                 :src="skill.iconImg"
                                 class="!w-10 !h-10"
+                                width="80"
+                                format="webp"
+                                quality="85"
+                                loading="lazy"
                                 :style="
                                     skill.fg === '#fff'
                                         ? 'filter: brightness(0) invert(1)'
