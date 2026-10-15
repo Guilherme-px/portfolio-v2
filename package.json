@@ -11,18 +11,22 @@
   },
   "dependencies": {
     "@iconify-json/uil": "^1.2.3",
-    "@nuxt/fonts": "0.13.0",
+    "@nuxt/fonts": "^1.0.1",
     "@nuxt/icon": "2.2.1",
     "@nuxt/image": "2.0.0",
     "@nuxt/ui": "^4.4.0",
-    "@nuxtjs/seo": "3.4.0",
+    "@nuxtjs/seo": "^6.0.1",
     "@vercel/analytics": "^1.6.1",
     "devicon": "^2.17.0",
     "mermaid": "^11.16.0",
-    "nuxt": "^4.3.0",
+    "nuxt": "^4.6.1",
     "swagger-ui-dist": "^5.32.11",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.144",
+    "satori": "^0.59.1"
   }
 }
